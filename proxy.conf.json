@@ -1,25 +1,12 @@
 {
-    "/inti/v1/**": {
-      "target": "http://localhost:9090",
+    "/api/v1/**": {
+      "target": "http://51.38.125.168",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"
     },
     "/oauth/**": {
-      "target": "http://localhost:9090",
-      "secure": false,
-      "changeOrigin": true,
-      "logLevel": "debug"
-    },
-    "/inti/v0/**": {
-      "target": "http://localhost:8093/INTI_APP_WEB",
-      "secure": false,
-      "changeOrigin": true,
-      "logLevel": "debug"
-    }
-    ,
-    "/login/**": {
-      "target": "http://localhost:9090",
+      "target": "http://51.38.125.168",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"
