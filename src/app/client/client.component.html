@@ -1,0 +1,192 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+        <app-aside></app-aside>
+        <!-- Right Panel -->
+    
+    <div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Créer un nouveau client</h1>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Information générale</strong>
+                    </div>
+                    <div class="card-body">
+                      <!-- Credit Card -->
+                      <div id="pay-invoice">
+                          <div class="card-body">
+                                  <div class="form-group text-center">
+                                      <ul class="list-inline">
+                                          <li class="list-inline-item"><i class="fa fa-address-card fa-4x"></i></li>
+                                      </ul>
+                                  </div>
+                                  <hr>
+                                  <div class="form-group input-group-sm">
+                                      <label for="cc-payment" class="control-label mb-1 fs-menu">Nom</label>
+                                      <input id="cc-pament" name="nom" type="text" class="form-control">
+                                  </div>
+                                  <div class="form-group input-group-sm">
+                                    <label for="prenom" class="control-label mb-1 fs-menu">Prénom</label>
+                                    <input id="prenom" name="prenom" type="text" class="form-control">
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-6">
+                                          <div class="form-group input-group-sm">
+                                            <label for="dateDeNaissance" class="control-label mb-1 fs-menu">Date de naissance</label>
+                                            <input id="dateDeNaissance" name="dateDeNaissance" type="date" class="form-control">
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                        <div class="form-group input-group-sm">
+                                          <label for="lieuDeNaissance" class="control-label mb-1 fs-menu">Lieu de naissance</label>
+                                          <input id="lieuDeNaissance" name="lieuDeNaissance" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group input-group-sm">
+                                    <label for="adresse" class="control-label mb-1 fs-menu">Adresse</label>
+                                    <input id="adresse" name="adresse" type="text" class="form-control">
+                                  </div>
+                                  <div class="form-group input-group-sm">
+                                    <label for="email" class="control-label mb-1 fs-menu">Mail</label>
+                                    <input id="email" name="email" type="text" class="form-control">
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group input-group-sm">
+                                          <label for="tel1" class="control-label mb-1 fs-menu">Tél 1</label>
+                                          <input id="tel1" name="tel1" type="tel" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group input-group-sm">
+                                            <label for="tel2" class="control-label mb-1 fs-menu">Tél 2</label>
+                                            <input id="tel2" name="tel2" type="tel" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                        <div class="col col-md-3"><label class=" form-control-label fs-menu">Type client</label></div>
+                                        <div class="col col-md-9">
+                                          <div class="form-check-inline form-check">
+                                            <label for="inline-radio1" class="form-check-label fs-menu" style="padding-right: 30px;font-weight: bold">
+                                              <input type="radio" id="inline-radio1" name="inline-radios" value="option1" class="form-check-input">Particulier
+                                            </label>
+                                            <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
+                                              <input type="radio" id="inline-radio2" name="inline-radios" value="option2" class="form-check-input">Soçiété
+                                            </label>
+                                          </div>
+                                        </div>
+                                </div>
+                          </div>
+                      </div>
+      
+                    </div>
+                </div> <!-- .card -->
+      
+              </div><!--/.col-->
+      
+              <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Document d'information générale - Client</strong>
+                    </div>
+                    <div class="card-body">
+                      <!-- Credit Card -->
+                      <div id="pay-invoice">
+                          <div class="card-body">
+                                <div class="form-group text-center">
+                                      <ul class="list-inline">
+                                          <li class="list-inline-item"><i class="text-muted fa fa-files-o fa-4x"></i></li>
+                                      </ul>
+                                </div>
+                                <hr>
+                                <div class="form-group input-group-sm">
+                                    <label for="passport" class="control-label mb-1 fs-menu">Passport N°</label>
+                                    <input id="passport" name="passport" type="text" class="form-control">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group input-group-sm">
+                                          <label for="dateFabricationPas" class="control-label mb-1 fs-menu">Emis le</label>
+                                          <input id="dateFabricationPas" name="dateFabricationPas" type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                      <div class="form-group input-group-sm">
+                                        <label for="lieuFabPassport" class="control-label mb-1 fs-menu">À</label>
+                                        <input id="lieuFabPassport" name="lieuFabPassport" type="text" class="form-control">
+                                      </div>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="form-group input-group-sm">
+                                    <label for="permis" class="control-label mb-1 fs-menu">Permis N°</label>
+                                    <input id="permis" name="permis" type="text" class="form-control">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group input-group-sm">
+                                          <label for="dateFabricationPermis" class="control-label mb-1 fs-menu">Emis le</label>
+                                          <input id="dateFabricationPermis" name="dateFabricationPermis" type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                      <div class="form-group input-group-sm">
+                                        <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">À</label>
+                                        <input id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
+                                      </div>
+                                  </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                        <label for="observation" class="control-label mb-1 fs-menu">Observation sur le client</label>
+                                        <textarea id="observation" rows="4" name="observation" type="text" class="form-control"></textarea>
+                                </div>
+                          </div>
+                      </div>
+                    </div>
+                </div> <!-- .card -->
+      
+              </div><!--/.col-->
+              
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                        <div class="card">
+                          <div id="pay-invoice">
+                              <div class="card-body">
+                                  <form action="" method="post" novalidate="novalidate">
+                                      <div>
+                                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                              <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                              <span id="payment-button-amount">Enregistrer</span>
+                                              <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                          </button>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+                        </div> <!-- .card -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /#right-panel -->
+  <!-- Right Panel -->
+</div>
+
+
+
+
+

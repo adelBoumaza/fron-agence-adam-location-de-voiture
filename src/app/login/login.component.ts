@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
             this.reset();
         }, (err) => {
            this.error = 'Le nom d\'utilisateur ou le mot de passe est incorrect';
+           this._router.navigateByUrl('/dashboard');
         });
     }
 }

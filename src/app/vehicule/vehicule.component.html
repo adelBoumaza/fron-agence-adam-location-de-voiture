@@ -1,0 +1,174 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+    <app-aside></app-aside>
+    <!-- Right Panel -->
+
+<div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Créer une nouvelle voiture</h1>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">information générale - Voiture</strong>
+                </div>
+                <div class="card-body">
+                  <!-- Credit Card -->
+                  <div id="pay-invoice">
+                      <div class="card-body">
+                            <div class="form-group text-center">
+                                  <ul class="list-inline">
+                                      <li class="list-inline-item"><i class="text-muted fa fa-car fa-4x"></i></li>
+                                  </ul>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-3">
+                                        <div class="form-group  input-group-sm">
+                                                <label for="Marque" class="control-label mb-1 fs-menu">Marque</label>
+                                                <input id="Marque" name="Marque" type="text" class="form-control">
+                                        </div>
+                                </div>
+                                <div class="col-3">
+                                        <div class="form-group input-group-sm">
+                                                  <label for="Immatricule" class="control-label mb-1 fs-menu">Immatricule</label>
+                                                  <input id="Immatricule" name="Immatricule" type="text" class="form-control">
+                                        </div>
+                              </div>
+                              <div class="col-3 input-group-sm">
+                                    <label for="Caisse" class="control-label mb-1 fs-menu">Type véhicule</label>
+                                    <select name="Caisse" id="Caisse" class="form-control">
+                                            <option value="0">Please select</option>
+                                            <option value="1">Touristique</option>
+                                            <option value="2">Commerciale</option>
+                                    </select>
+                              </div>
+                              <div class="col-3 input-group-sm">
+                                    <label for="model" class="control-label mb-1 fs-menu">Modèle</label>
+                                    <input id="model" name="model" type="text" class="form-control">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-3">
+                                  <div class="form-group input-group-sm">
+                                    <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">Prix d'achat</label>
+                                    <input id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group input-group-sm">
+                                            <label for="couleur" class="control-label mb-1 fs-menu">Coulour</label>
+                                            <select name="coulour" id="coulour" class="form-control ">
+                                                    <option value="0">Please select</option>
+                                                    <option value="1">Gris</option>
+                                                    <option value="2">Rouge</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                      <div class="form-group input-group-sm">
+                                        <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">Kilommétrage actuel</label>
+                                        <input id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
+                                      </div>
+                                </div>
+                                <div class="col-3">
+                                        <div class="form-group input-group-sm">
+                                          <label for="coulour" class="control-label mb-1 fs-menu">Carburant actuel</label>
+                                          <input id="coulour" name="coulour" type="text" class="form-control">
+                                        </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class="col-6">
+                                            <div class="col col-md-3"><label class=" form-control-label fs-menu">Energie</label></div>
+                                            <div class="col col-md-9">
+                                              <div class="form-check-inline form-check">
+                                                <label for="inline-radio1" class="form-check-label fs-menu" style="padding-right: 30px;font-weight: bold">
+                                                  <input type="radio" id="inline-radio1" name="inline-radios" value="option1" class="form-check-input">Essance
+                                                </label>
+                                                <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
+                                                  <input type="radio" id="inline-radio2" name="inline-radios" value="option2" class="form-check-input">Diesel
+                                                </label>
+                                                <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
+                                                        <input type="radio" id="inline-radio2" name="inline-radios" value="option3" class="form-check-input">GPL
+                                                      </label>
+                                              </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-6">
+                                      <div class="form-group input-group-sm">
+                                        <label for="roueDessecours" class="control-label mb-1 fs-menu">Contient la roue de secours ?</label>
+                                        <select name="roueDessecours" id="roueDessecours" class="form-control">
+                                                <option value="0">Please select</option>
+                                                <option value="1">Oui</option>
+                                                <option value="2">Non</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class="col-6">
+                                        <label for="prixAssurance" class="control-label mb-1 fs-menu">Prix d'assurance</label>
+                                        <div class="form-group input-group-sm">
+                                                <input id="prixAssurance" name="prixAssurance" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                            <label for="expirationAssurance" class="control-label mb-1 fs-menu">Expiration d'assurance</label>
+                                            <div class="form-group input-group-sm">
+                                                    <input id="expirationAssurance" name="expirationAssurance" type="date" class="form-control">
+                                            </div>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <label for="observation" class="control-label mb-1 fs-menu">Observation sur la voiture</label>
+                                    <textarea id="observation" rows="10" name="observation" type="text" class="form-control"></textarea>
+                            </div>
+                      </div>
+                      <hr>
+                  </div>
+                  <div class="col-lg-12">
+                        <div class="card">
+                              <div id="pay-invoice">
+                                  <div class="card-body">
+                                      <form action="" method="post" novalidate="novalidate">
+                                          <div>
+                                              <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                  <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                  <span id="payment-button-amount">Enregistrer</span>
+                                                  <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                              </button>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                        </div> <!-- .card -->
+                    </div><!--/.col-->
+                </div>
+            </div> <!-- .card -->
+  
+          </div><!--/.col-->
+          
+        </div>
+    </div>
+</div>
+</div><!-- /#right-panel -->
+<!-- Right Panel -->
+</div>
+
+
+
+
+

@@ -10,25 +10,48 @@ import { LoginService } from './login/login.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardService } from './dashboard/dashboard.service';
 import { AuthGuard } from './common/authGuard/AuthGuard';
+import { LayoutComponent } from './layout/layout.component';
+import { ClientComponent } from './client/client.component';
+import { AsideComponent } from './aside/aside.component';
+import { VehiculeComponent } from './vehicule/vehicule.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { LocationComponent } from './location/location.component';
+import { ReservationComponent } from './reservation/reservation.component';
+import { ReservationService } from './reservation/reservation.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FullCalendarModule } from 'ng-fullcalendar';
+
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
-    
+    DashboardComponent,
+    LayoutComponent,
+    ClientComponent,
+    AsideComponent,
+    VehiculeComponent,
+    LocationComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
-    routing
+    routing,
+    ColorPickerModule,
+    FullCalendarModule,
+    NgbModule.forRoot()
   ],
   providers: [
     LoginService,
     DashboardService,
-    AuthGuard
+    AuthGuard,
+    ReservationService
   ],
   bootstrap: [AppComponent]
 })

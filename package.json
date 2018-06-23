@@ -20,8 +20,13 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@ng-bootstrap/ng-bootstrap": "^2.1.2",
     "core-js": "^2.5.4",
+    "fullcalendar": "^3.6.1",
+    "ng-fullcalendar": "^1.6.1",
+    "ngx-color-picker": "^6.3.3",
     "rxjs": "^6.0.0",
+    "rxjs-compat": "^6.0.0-tactical-rc.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
