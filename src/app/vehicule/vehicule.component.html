@@ -31,20 +31,97 @@
                                   </ul>
                             </div>
                             <hr>
+                            <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="toggle-1">
+                                    <ngb-panel id="toggle-1" title="Choix du véhicule" >
+                                      <ng-template ngbPanelContent>
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(1);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  width="84px" height="84px" src="../../assets/icon/icon-marque/Icon_Peugeot.png">
+                                                        </a>
+                                                    </div>
+                                            </div>  
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(2);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  width="84px" height="84px"  src="../../assets/icon/icon-marque/icon-renault.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(3);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  width="84px" height="84px"  src="../../assets/icon/icon-marque/icon-opel.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(4);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  width="84px" height="84px" src="../../assets/icon/icon-marque/icon-Citroen.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(5);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  width="84px" height="84px"  src="../../assets/icon/icon-marque/icon-bmw.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(6);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  width="84px" height="84px"  src="../../assets/icon/icon-marque/icon-alfa-romeo.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(7);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  style="cursor: pointer;" width="84px" height="84px"  src="../../assets/icon/icon-marque/icon-audi.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div class="card col-3">
+                                                    <div class="card-body" style="text-align: center">
+                                                        <a (click)="choiseMarque(8);acc.toggle('toggle-2')">
+                                                            <img style="cursor: pointer;"  style="cursor: pointer;"  width="84px" height="84px"  src="../../assets/icon/icon-marque/icon-Chevrolet.png">
+                                                        </a>
+                                                    </div>
+                                            </div> 
+                                            <div>
+                                                <span class="control-label mb-1 fs-menu" *ngIf="marqueSelected !== '' ">la marque sélectionnée est :{{marqueSelected}} </span>
+                                            </div>
+                                      </ng-template>
+                                    </ngb-panel>
+                                    <ngb-panel id="toggle-2" title="Voulez vous trouver une marque ?">
+                                      <ng-template ngbPanelContent>
+                                            <div class="col-3 input-group-sm">
+                                                    <label for="marque" class="control-label mb-1 fs-menu">Marque</label>
+                                                    <select class="form-control selectpicker" [(ngModel)]="marqueSelected" name="ftr" id="ftr">
+                                                            <option  *ngFor="let f of tabMarque" [ngValue]="f">
+                                                                    {{f}}  
+                                                            </option>
+                                                           
+                                                    </select>  
+                                             </div>
+                                      </ng-template>
+                                    </ngb-panel>
+                            </ngb-accordion>
+                            <br>
                             <div class="row ">
-                                <div class="col-3">
-                                        <div class="form-group  input-group-sm">
-                                                <label for="Marque" class="control-label mb-1 fs-menu">Marque</label>
-                                                <input id="Marque" name="Marque" type="text" class="form-control">
-                                        </div>
+                                 <div class="col-4 input-group-sm">
+                                        <label for="model" class="control-label mb-1 fs-menu">Modèle</label>
+                                        <input id="model" name="model" type="text" class="form-control">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                         <div class="form-group input-group-sm">
                                                   <label for="Immatricule" class="control-label mb-1 fs-menu">Immatricule</label>
                                                   <input id="Immatricule" name="Immatricule" type="text" class="form-control">
                                         </div>
-                              </div>
-                              <div class="col-3 input-group-sm">
+                                </div>
+                              <div class="col-4 input-group-sm">
                                     <label for="Caisse" class="control-label mb-1 fs-menu">Type véhicule</label>
                                     <select name="Caisse" id="Caisse" class="form-control">
                                             <option value="0">Please select</option>
@@ -52,10 +129,7 @@
                                             <option value="2">Commerciale</option>
                                     </select>
                               </div>
-                              <div class="col-3 input-group-sm">
-                                    <label for="model" class="control-label mb-1 fs-menu">Modèle</label>
-                                    <input id="model" name="model" type="text" class="form-control">
-                              </div>
+                             
                             </div>
                             <hr>
                             <div class="row">
@@ -66,13 +140,10 @@
                                   </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="form-group input-group-sm">
+                                    <div class="form-group input-group-sm" style="display: inline-grid!important;">
                                             <label for="couleur" class="control-label mb-1 fs-menu">Coulour</label>
-                                            <select name="coulour" id="coulour" class="form-control ">
-                                                    <option value="0">Please select</option>
-                                                    <option value="1">Gris</option>
-                                                    <option value="2">Rouge</option>
-                                            </select>
+                                            <input class="col-12" (colorPickerChange)="onChangeColor($event)"  [(colorPicker)]="color" [style.background]="color"/>
+                                           
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -106,7 +177,7 @@
                                               </div>
                                             </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                       <div class="form-group input-group-sm">
                                         <label for="roueDessecours" class="control-label mb-1 fs-menu">Contient la roue de secours ?</label>
                                         <select name="roueDessecours" id="roueDessecours" class="form-control">
@@ -116,22 +187,95 @@
                                         </select>
                                       </div>
                                     </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                    <div class="col-6">
-                                        <label for="prixAssurance" class="control-label mb-1 fs-menu">Prix d'assurance</label>
-                                        <div class="form-group input-group-sm">
-                                                <input id="prixAssurance" name="prixAssurance" type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                            <label for="expirationAssurance" class="control-label mb-1 fs-menu">Expiration d'assurance</label>
+                                    <div class="col-3">
                                             <div class="form-group input-group-sm">
-                                                    <input id="expirationAssurance" name="expirationAssurance" type="date" class="form-control">
+                                              <label for="anneF" class="control-label mb-1 fs-menu">Année de fabrication</label>
+                                              <input id="anneF" name="anneF" type="text" class="form-control">
                                             </div>
                                     </div>
                             </div>
+                            <hr>
+                        
+                                <button (click)="open(content)" class="btn btn-outline-danger btn-sm">
+                                       Déclarer une nouvelle assurance
+                                </button>
+                                <br><br>
+                                <table class="table table-hover table-bordered">
+                                    <tr>
+                                        <th>N° assurance</th>
+                                        <th>Date de déclaration</th>
+                                        <th>Date d'expiration</th>
+                                        <th>Prix</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>11/01/2018</td>
+                                        <td>11/01/2019</td>
+                                        <td>40000</td>
+                                    </tr>
+                                </table>  
+                                <br>
+                                <!--modal-->
+                            <ng-template #content let-c="close" let-d="dismiss">
+                                    <div class="modal-header" style="text-align: center;margin: auto;">
+                                        <div class="form-group text-center">
+                                                <div class="form-group text-center">
+                                                        <ul class="list-inline">
+                                                            <img  [src]="ICON_ASSURANCE_PATH"  style="margin: auto">
+                                                        </ul>
+                                                </div>
+                                        </div>
+                                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <div class="form-group">
+                                                    <div class="form-group input-group-sm col-12">
+                                                            <label for="dateExp" class="control-label mb-1 fs-menu">Date d'expiration</label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                  <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                         name="dr" [(ngModel)]="dateExp" ngbDatepicker #dateR="ngbDatepicker">
+                                                                  <div class="input-group-append">
+                                                                        <button class="btn btn-outline-secondary" (click)="dateR.toggle()" type="button">
+                                                                            <li class="list-inline-item" style="cursor: pointer;">
+                                                                                <i class="fa fa-calendar-times-o fa-2x"></i>
+                                                                            </li>
+                                                                        </button>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                            <div class="form-group input-group-sm">
+                                                                <label for="roueDessecours" class="control-label mb-1 fs-menu">Type de l'assurance</label>
+                                                                <select name="roueDessecours" id="roueDessecours" class="form-control">
+                                                                        <option value="0">Please select</option>
+                                                                        <option value="1">Formule TOUT EN 1 (la tous risques)</option>
+                                                                        <option value="2">Formule CLASSIC AUTO (la dommage collision)</option>
+                                                                        <option value="2">Formule CLASSIC + (la dommage collision à valeur réelle)</option>
+                                                                </select>
+                                                            </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="col-12">
+                                                            <div class="form-group input-group-sm">
+                                                                <label for="prix" class="control-label mb-1 fs-menu">Prix de l'assurance</label>
+                                                                <input id="prix" name="prix" type="text" class="form-control">
+                                                            </div>
+                                                    </div>
+                                                    <br>
+                                                    <div style="clear: both;"></div>
+                                                    <br>
+                                                    <hr>
+                                                    <br>
+                                                    <div class="form-group text-center" >
+                                                            <button type="button" class="btn btn-outline-info btn-sm">Ajouter une nouvelle assurance</button>
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </ng-template>
                             <div class="form-group">
                                     <label for="observation" class="control-label mb-1 fs-menu">Observation sur la voiture</label>
                                     <textarea id="observation" rows="10" name="observation" type="text" class="form-control"></textarea>
@@ -145,7 +289,7 @@
                                   <div class="card-body">
                                       <form action="" method="post" novalidate="novalidate">
                                           <div>
-                                              <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                              <button id="payment-button" type="submit" class="btn btn-outline-info btn-block">
                                                   <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                   <span id="payment-button-amount">Enregistrer</span>
                                                   <span id="payment-button-sending" style="display:none;">Sending…</span>

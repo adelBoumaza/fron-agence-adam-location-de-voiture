@@ -63,9 +63,9 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                   <input class="form-control" placeholder="yyyy-mm-dd"
-                                                         name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                                         name="dateD" [(ngModel)]="dateDeDepart" ngbDatepicker #dateD="ngbDatepicker">
                                                   <div class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                                    <button class="btn btn-outline-secondary" (click)="dateD.toggle()" type="button">
                                                         <li class="list-inline-item" style="cursor: pointer;">
                                                             <i class="fa fa-calendar-times-o fa-2x"></i>
                                                         </li>
@@ -85,9 +85,9 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                   <input class="form-control" placeholder="yyyy-mm-dd"
-                                                         name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                                         name="dr" [(ngModel)]="dateDeRetour" ngbDatepicker #dateR="ngbDatepicker">
                                                   <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                                        <button class="btn btn-outline-secondary" (click)="dateR.toggle()" type="button">
                                                             <li class="list-inline-item" style="cursor: pointer;">
                                                                 <i class="fa fa-calendar-times-o fa-2x"></i>
                                                             </li>

@@ -1,0 +1,149 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+    <app-aside></app-aside>
+    <!-- Right Panel -->
+
+<div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Maintenance de vhéicule</h1>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Fiche technique de vhéicule</strong>
+                </div>
+                <div class="card-body">
+                  <!-- Credit Card -->
+                  <div id="pay-invoice">
+                      <div class="card-body">
+                            <div class="form-group text-center">
+                                  <ul class="list-inline">
+                                      <img  [src]="ICON_MAINTENANCE_PATH"  style="margin: auto">
+                                  </ul>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-4 input-group-sm">
+                                        <label for="marque" class="control-label mb-1 fs-menu">Marque</label>
+                                        <select class="form-control selectpicker" [(ngModel)]="marqueSelected" name="ftr" id="ftr">
+                                                <option  *ngFor="let f of tabMarques" [ngValue]="f">
+                                                            {{f}}  
+                                                </option>
+                                        </select>  
+                                </div>
+                                <div class="col-4 input-group-sm">
+                                    <label for="voiture" class="control-label mb-1 fs-menu">Voiture</label>
+                                    <select name="voiture" id="voiture" class="form-control">
+                                                <option value="0">Please select</option>
+                                                <option value="1">Clio</option>
+                                                <option value="2">Logane</option>
+                                    </select>
+                                </div>
+                              <div class="col-4">
+                                  <div class="form-group input-group-sm">
+                                            <label for="fh" class="control-label mb-1 fs-menu">Assurance</label>
+                                            <p>Termine le : 11/05/2018</p>
+                                  </div>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-4 input-group-sm">
+                                    <label for="tr" class="control-label mb-1 fs-menu">Type de révision</label>
+                                    <select class="form-control"  name="tr" id="tr">
+                                        <option *ngFor="let f of maintenanceArray" [ngValue]="f" >{{f}}</option>
+                                      </select>  
+                                </div>
+                                <div class="col-4">
+                                        <div class="form-group input-group-sm">
+                                                  <label for="km" class="control-label mb-1 fs-menu">KM</label>
+                                                  <input id="km" name="km" type="text" class="form-control">
+                                        </div>
+                                </div>
+                                <div class="col-4">
+                                  <div class="form-group input-group-sm">
+                                            <label for="pi" class="control-label mb-1 fs-menu">Prix de l'intervention</label>
+                                            <input id="pi" name="pi" type="text" class="form-control">
+                                  </div>
+                                </div>
+                          </div>
+                        <hr>
+                        <div class="card-body">
+                            <button style="margin-right: 20px" type="button" class="btn btn-success"><i class="fa fa-magic"></i>&nbsp; Enregistrer</button>
+                            <button type="button" class="btn btn-warning"><i class="fa fa-map-marker"></i>&nbsp; Annuler</button>
+                        </div>
+                        <hr>
+                          <h5 style="text-align: center">Liste de la révision du parc</h5>
+                        <br> 
+                        <div class="row">
+                              <div class="col-4 input-group-sm">
+                                  <label for="ftr" class="control-label mb-1 fs-menu">Filtrer par type de révision</label>
+                                  <select class="form-control"  name="ftr" id="ftr">
+                                      <option *ngFor="let f of maintenanceArray" [ngValue]="f" >{{f}}</option>
+                                    </select>  
+                              </div>
+                        </div>
+                        <br>
+                            <table class="table table-bordered table-hover" style="margin: auto">
+                                <thead>
+                                  <tr>
+                                    <th>Date</th>
+                                    <th>KM</th>
+                                    <th>Révision</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>11/04/2018</td>
+                                    <td>56788</td>
+                                    <td>Filtre à huile</td>
+                                    <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>11/04/2018</td>
+                                      <td>56788</td>
+                                      <td>Filtre à huile</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                        <td>11/04/2018</td>
+                                        <td>56788</td>
+                                        <td>Filtre à huile</td>
+                                        <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                        <td>11/04/2018</td>
+                                        <td>56788</td>
+                                        <td>Filtre à huile</td>
+                                        <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                    </div>
+                </div>
+                </div>
+            </div> <!-- .card -->
+  
+          </div><!--/.col-->
+          
+        </div>
+    </div>
+</div>
+</div><!-- /#right-panel -->
+<!-- Right Panel -->
+</div>
+
+
+
+
+

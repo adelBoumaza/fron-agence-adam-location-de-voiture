@@ -1,0 +1,22 @@
+.star {
+    font-size: 1.5rem;
+    color: #b0c4de;
+  }
+  .filled {
+    color: green;
+  }
+  .bad {
+    color: #deb0b0;
+  }
+  .filled.bad {
+    color: #ff1e1e;
+  }
+  .badg-start{
+    /*border: 1px solid #01c9e4;*/
+    padding: 5px;
+    margin: 40px;
+    font-weight: 100;
+    background: #01c9e4;
+    border-radius: 5px;
+    color: white;
+  }

@@ -1,25 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-
-
 @Injectable()
-export class ReservationService {
-
+export class ReservationSesrvice {
     public getEvents(): Observable<any> {
-        const dateObj = new Date();
+        let dateStart = '2018-06-16T12:00:00';
+        let dateEnd = '2018-06-19T12:00:00';
+        const dateObj = new Date(dateStart);
+        const dateObjPlus1  = new Date(dateEnd);
         const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
         let data: any = [{
-            title: 'Renault Clio',
-            start: yearMonth + '-01'
+            voiture : 'Renault - Clio',
+            heureD  : '09:00',
+            heureR  : '10:00',
+            title   : 'Renault - Clio',
+            coulour : 'rouge',
+            start: dateObj,
+            end  : dateObjPlus1,
+            client : 'Boumaza Adel',
+            idClient : 1,
+            idVoiture : 4
         },
         {
-            title: 'BMW',
-            start: yearMonth + '-07',
-            end: yearMonth + '-10'
-        },
-        {
-            title: 'HAMER',
+            title: 'Long Event',
             start: yearMonth + '-07',
             end: yearMonth + '-10'
         },
@@ -34,7 +37,7 @@ export class ReservationService {
             start: yearMonth + '-16T16:00:00'
         },
         {
-            title: 'Mercedes',
+            title: 'Conference',
             start: yearMonth + '-11',
             end: yearMonth + '-13'
         },
@@ -64,10 +67,10 @@ export class ReservationService {
             start: yearMonth + '-13T07:00:00'
         },
         {
-            title: 'Yaris',
-            url: 'http://google.com/',
-            start: yearMonth + '-28'
+            title: 'parsing date',
+            end: '2018-06-18T00:00:00',
+            start: '2018-06-16T00:00:00'
         }];
         return Observable.of(data);
     }
-}
+};

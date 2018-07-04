@@ -12,7 +12,8 @@ export class LocationComponent implements OnInit {
 
   heureDepart : {hour: 13, minute: 30};
   heureRetour : {hour: 13, minute: 30};
-  model;
+  dateDeDepart;
+  dateDeRetour;
 
   constructor() { }
 

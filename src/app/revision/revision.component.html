@@ -1,0 +1,246 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+    <app-aside></app-aside>
+    <!-- Right Panel -->
+
+<div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Catégorie de révision</h1>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Options de l'utilisateur</strong>
+                </div>
+                <div class="card-body">
+                  <!-- Credit Card -->
+                  <div id="pay-invoice">
+                      <div class="card-body">
+                            <div class="form-group text-center">
+                                  <ul class="list-inline">
+                                      <img  [src]="ICON_REVISION_PATH"  style="margin: auto">
+                                  </ul>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-3">
+                                        <div class="form-group  input-group-sm">
+                                                <label for="vidange" class="control-label mb-1 fs-menu">Vidange</label>
+                                                <input id="vidange" name="vidange" type="text" class="form-control">
+                                        </div>
+                                </div>
+                                <div class="col-3">
+                                        <div class="form-group input-group-sm">
+                                                  <label for="fa" class="control-label mb-1 fs-menu">Filtre à air</label>
+                                                  <input id="fa" name="fa" type="text" class="form-control">
+                                        </div>
+                              </div>
+                              <div class="col-3">
+                                  <div class="form-group input-group-sm">
+                                            <label for="fh" class="control-label mb-1 fs-menu">Filtre à huile</label>
+                                            <input id="fh" name="fh" type="text" class="form-control">
+                                  </div>
+                              </div>
+                              <div class="col-3 input-group-sm">
+                                    <label for="fg" class="control-label mb-1 fs-menu">Filtre à gasoil</label>
+                                    <input id="fg" name="fg" type="text" class="form-control">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-3">
+                                        <div class="form-group  input-group-sm">
+                                                <label for="bougies" class="control-label mb-1 fs-menu">Bougies allumage</label>
+                                                <input id="bougies" name="bougies" type="text" class="form-control">
+                                        </div>
+                                </div>
+                                <div class="col-3">
+                                        <div class="form-group input-group-sm">
+                                                  <label for="kt" class="control-label mb-1 fs-menu">Kit de distribution</label>
+                                                  <input id="kt" name="kt" type="text" class="form-control">
+                                        </div>
+                              </div>
+                              <div class="col-3">
+                                  <div class="form-group input-group-sm">
+                                            <label for="ke" class="control-label mb-1 fs-menu">Kit d'embrayage</label>
+                                            <input id="ke" name="ke" type="text" class="form-control">
+                                  </div>
+                              </div>
+                              <div class="col-3 input-group-sm">
+                                    <label for="cdp" class="control-label mb-1 fs-menu">Suspensions</label>
+                                    <input id="cdp" name="cdp" type="text" class="form-control">
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row ">
+                              <div class="col-3">
+                                      <div class="form-group  input-group-sm">
+                                              <label for="plq" class="control-label mb-1 fs-menu">Plaquettes</label>
+                                              <input id="plq" name="plq" type="text" class="form-control">
+                                      </div>
+                              </div>
+                              <div class="col-3">
+                                      <div class="form-group input-group-sm">
+                                                <label for="pneus" class="control-label mb-1 fs-menu">Pneus</label>
+                                                <input id="pneus" name="pneus" type="text" class="form-control">
+                                      </div>
+                              </div>
+                              <div class="col-3">
+                                <div class="form-group input-group-sm">
+                                          <label for="rlm" class="control-label mb-1 fs-menu">Roulements</label>
+                                          <input id="rlm" name="rlm" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="col-3 input-group-sm">
+                                  <label for="rotules" class="control-label mb-1 fs-menu">Rotules</label>
+                                  <input id="rotules" name="rotules" type="text" class="form-control">
+                              </div>
+                        </div>
+                        <hr>
+                        <div class="card-body">
+                            <button style="margin-right: 20px" type="button" class="btn btn-success"><i class="fa fa-magic"></i>&nbsp; Enregistrer</button>
+                            <button type="button" class="btn btn-warning"><i class="fa fa-map-marker"></i>&nbsp; Annuler</button>
+                        </div>
+                        <hr>
+                          <h5 style="text-align: center">configuration de la révision du parc</h5>
+                        <br> 
+                        <div class="row">
+                          <div class="col-3">
+                              <div class="form-group  input-group-sm">
+                                      <label for="voiture" class="control-label mb-1 fs-menu">Rechercher une voiture</label>
+                                      <input id="voiture" name="voiture" type="text" class="form-control">
+                              </div>
+                          </div>
+                        </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                    <th>Voiture</th>
+                                    <th>immatricule</th>
+                                    <th>Filtre à air</th>
+                                    <th>Filtre à huile</th>
+                                    <th>Plaquettes</th>
+                                    <th>Bougies</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>Renault - Clio</td>
+                                    <td>OO-01-54657</td>
+                                    <td>10000</td>
+                                    <td>30000</td>
+                                    <td>10000</td>
+                                    <td>30000</td>
+                                    <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Renault - Clio</td>
+                                      <td>OO-01-54657</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td>10000</td>
+                                      <td>30000</td>
+                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                    </div>
+                </div>
+                </div>
+            </div> <!-- .card -->
+  
+          </div><!--/.col-->
+          
+        </div>
+    </div>
+</div>
+</div><!-- /#right-panel -->
+<!-- Right Panel -->
+</div>
+
+
+
+
+

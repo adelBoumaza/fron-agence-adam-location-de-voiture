@@ -1,0 +1,221 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+        <app-aside></app-aside>
+        <!-- Right Panel -->
+    
+    <div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Créer une nouvelle réservation</h1>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">information générale - réservation</strong>
+                    </div>
+                    <div class="card-body">
+                      <!-- Credit Card -->
+                      <div id="pay-invoice">
+                          <div class="card-body">
+                                <div class="form-group text-center">
+                                        <img  [src]="ICON_RESERVATION_PATH"  style="margin: auto">
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6 input-group-sm">
+                                        <label for="Caisse" class="control-label mb-1 fs-menu">Rechercher un Client</label>
+                                        <select name="Caisse" id="Caisse" class="form-control">
+                                                <option value="0">Please select</option>
+                                                <option value="1">Boumaza - adel</option>
+                                                <option value="2">Bounajma - sara</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-3">
+                                      <div class="form-group input-group-sm">
+                                        <label for="nom" class="control-label mb-1 fs-menu">Nom</label>
+                                        <input id="nom" name="nom" type="text" class="form-control">
+                                      </div>
+                                    </div>
+                                    <div class="col-3">
+                                            <div class="form-group input-group-sm">
+                                              <label for="prenom" class="control-label mb-1 fs-menu">Prénom</label>
+                                              <input id="prenom" name="prenom" type="text" class="form-control">
+                                            </div>
+                                    </div>
+                                    <div class="col-3">
+                                            <div class="form-group input-group-sm">
+                                              <label for="tel" class="control-label mb-1 fs-menu">Tél</label>
+                                              <input id="tel" name="tel" type="text" class="form-control">
+                                            </div>
+                                    </div>
+                                    <div class="col-3">
+                                          <div class="form-group input-group-sm">
+                                            <label for="mail" class="control-label mb-1 fs-menu">Mail</label>
+                                            <input id="mail" name="mail" type="text" class="form-control">
+                                          </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row" style="margin: auto!important;text-align: center">
+                                        <div class="col-4">
+                                            <label for="prixAssurance" class="control-label mb-1 fs-menu">Date de départ</label>
+                                            <div class="form-group input-group-sm">
+                                                    <ngb-datepicker [(ngModel)]="dateDepart"></ngb-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                                <div style="position: relative;top: 125px">
+                                                        <button type="button" class="btn btn-outline-danger btn-sm">Voir la disponibilitée</button>
+                                                </div>
+                                        </div>
+                                        <div class="col-4">
+                                                <label for="expirationAssurance" class="control-label mb-1 fs-menu">Date de retour</label>
+                                                <div class="form-group input-group-sm">
+                                                        <ngb-datepicker [(ngModel)]="dateRetour" ></ngb-datepicker>
+                                                </div>
+                                        </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                        <div class="col-6 input-group-sm">
+                                            <label for="Caisse" class="control-label mb-1 fs-menu">Sélectionner une Voiture</label>
+                                            <select name="Caisse" id="Caisse" class="form-control">
+                                                    <option value="0">Please select</option>
+                                                    <option value="1">Renault - Clio</option>
+                                                    <option value="2">BMW - CR209</option>
+                                            </select>
+                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                        <div class="card col-3" style="margin-right: 10px;">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-one">
+                                                        <div class="stat-content dib">
+                                                            <label class="checkbox-inline">
+                                                                <input (click) = "onChecked(1)" type="radio" value="" name="voiture">
+                                                            </label>
+                                                            <div class="stat-text">25 Juin</div>
+                                                            <div class="stat-digit">Renault - clio</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="card col-3" style="margin-right: 10px;">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-one">
+                                                        <div class="stat-content dib">
+                                                            <label class="checkbox-inline">
+                                                                <input type="radio" value="" name="voiture">
+                                                            </label>
+                                                            <div class="stat-text">26 Juin</div>
+                                                            <div class="stat-digit">Renault - clio</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="card col-3" style="margin-right: 10px;">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-one">
+                                                        <div class="stat-content dib">
+                                                            <label class="checkbox-inline">
+                                                                <input type="radio" value="" name="voiture">
+                                                            </label>
+                                                            <div class="stat-text">28 Juin</div>
+                                                            <div class="stat-digit">Renault - clio</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="card col-2" style="margin-right: 10px;">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-one">
+                                                        <div class="stat-content dib">
+                                                            <label class="checkbox-inline">
+                                                                <input type="radio" value="" name="voiture">
+                                                            </label>
+                                                            <div class="stat-text">29 Juin</div>
+                                                            <div class="stat-digit">Renault - clio</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-3">
+                                                <div class="form-group input-group-sm">
+                                                  <label for="totalTTC" class="control-label mb-1 fs-menu">Total TTC</label>
+                                                  <input id="totalTTC" name="totalTTC" type="text" class="form-control">
+                                                </div>
+                                        </div>
+                                        <div class="col-3">
+                                                <div class="form-group input-group-sm">
+                                                    <label for="versement" class="control-label mb-1 fs-menu">Versement</label>
+                                                    <input id="versement" name="versement" type="text" class="form-control">
+                                                </div>
+                                        </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                        <div class="col-12">
+                                                <div class="col col-md-6"><label class=" form-control-label fs-menu">Le traitement n'est pas administré à temps, la réservation est placée sur liste d'attente?</label></div>
+                                                <div class="col col-md-9">
+                                                  <div class="form-check-inline form-check">
+                                                    <label for="inline-radio1" class="form-check-label fs-menu" style="padding-right: 30px;font-weight: bold">
+                                                      <input type="radio" id="inline-radio1" name="inline-radios"  class="form-check-input">Oui
+                                                    </label>
+                                                    <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
+                                                      <input type="radio" id="inline-radio2" name="inline-radios" class="form-check-input">Non
+                                                    </label>
+                                                  </div>
+                                                </div>
+                                        </div>
+                                </div>
+                          </div>
+                          <hr>
+                      </div>
+                      <div class="col-lg-12">
+                            <div class="card">
+                                  <div id="pay-invoice">
+                                      <div class="card-body">
+                                          <form action="" method="post" novalidate="novalidate">
+                                              <div>
+                                                  <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                      <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                      <span id="payment-button-amount">Réserver</span>
+                                                      <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                  </button>
+                                              </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                            </div> <!-- .card -->
+                        </div><!--/.col-->
+                    </div>
+                </div> <!-- .card -->
+      
+              </div><!--/.col-->
+              
+            </div>
+        </div>
+    </div>
+    </div><!-- /#right-panel -->
+    <!-- Right Panel -->
+    </div>
+    
+    
+    
+    
+    
+    

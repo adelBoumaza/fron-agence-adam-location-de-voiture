@@ -34,15 +34,27 @@ export class LoginComponent implements OnInit {
     {
         console.log(this.user);
         this.loginService.login(this.user)
-        .subscribe(response => {
-            localStorage.setItem('token', `${response.token_type} ${response.access_token}`);
-            console.log('localStorage' + localStorage.getItem('token'));
-            this._router.navigateByUrl('/dashboard');
-            this.reset();
-        }, (err) => {
-           this.error = 'Le nom d\'utilisateur ou le mot de passe est incorrect';
-           this._router.navigateByUrl('/dashboard');
-        });
+        .subscribe(response => 
+            {
+                localStorage.setItem('token', `${response.token_type} ${response.access_token}`);
+                console.log('localStorage' + localStorage.getItem('token'));
+                this._router.navigateByUrl('/dashboard');
+                this.reset();
+            }, (err) => 
+            {
+                this.error = 'Le nom d\'utilisateur ou le mot de passe est incorrect';
+                this._router.navigateByUrl('/home');
+            }
+        );
+        this.loginService.getCurrentUser()
+        .subscribe(response =>
+            {
+                localStorage.setItem('id',response.id);
+            }, error =>
+            {
+                console.log('Current User : ' + error);
+            }
+        );
     }
 }
 

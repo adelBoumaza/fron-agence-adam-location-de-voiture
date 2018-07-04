@@ -1,0 +1,96 @@
+
+<div class="col-lg-12" style="padding: 0px!important;">
+    <app-aside></app-aside>
+    <!-- Right Panel -->
+
+<div id="right-panel" class="right-panel col-lg-10 col-md-10 col-sm-12">
+        <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Calendrier - réservation</h1>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Information générale - Réservation</strong>
+                </div>
+                <div class="card-body">
+                  <!-- Credit Card -->
+                  <div id="pay-invoice">
+                      <div class="card-body">
+                              <div class="form-group text-center">
+                                  <ul class="list-inline">
+                                      <li class="list-inline-item"><i class="fa fa-address-card fa-4x"></i></li>
+                                  </ul>
+                              </div>
+                                <div *ngIf="calendarOptions">
+                                    <ng-fullcalendar dr (click)="confirmOpenV  && open(content)" #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)"
+                                        (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+                                </div>
+                             
+                      </div>
+                  </div>
+                </div>
+                <!--modal-->
+                <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Information - Réservation</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="form-group text-center">
+                                        <img  [src]="ICON_CAR_PATH"  style="margin: auto">
+                                        <br>
+                                        <span>Voiture : {{displayEvent.event.voiture}} / </span>
+                                        <span>coulour : {{displayEvent.event.coulour}}</span>
+                                        <br><br>
+                                        <button type="button" class="btn btn-outline-info btn-sm">Voir en détails - information voiture</button>
+                                </div>
+                                <hr>
+                                <div class="form-group text-center">
+                                        <img  [src]="ICON_CLIENT_PATH"  style="margin: auto">
+                                        <br>
+                                        <span>Client : {{displayEvent.event.client}} / </span>
+                                        <span>coulour : {{displayEvent.event.coulour}}</span>
+                                        <br><br>
+                                        <button type="button" class="btn btn-outline-info btn-sm">Voir en détails - information client</button>
+                                </div>
+                                <hr>
+                                <div class="form-group text-center">
+                                        <img  [src]="ICON_RESERVATION_PATH"  style="margin: auto">
+                                        <br>
+                                        <span>Du : {{displayEvent.event.start | date : 'dd/MM/yyyy'}} à  {{displayEvent.event.heureD}}</span>
+                                        <br>
+                                        <span>Au : {{displayEvent.event.end | date : 'dd/MM/yyyy' }} à  {{displayEvent.event.heureR}}</span>
+                                        <br><br>
+                                        <button type="button" class="btn btn-outline-info btn-sm">Voir en détails - information réservation</button>
+                                </div>
+                                <hr>
+                                <div class="form-group text-center">
+                                        <button type="button" class="btn btn-outline-info btn-sm" style="margin-right: 20px">Editer</button>
+                                        <button type="button" class="btn btn-outline-info btn-sm">Annuler cette réservation</button>
+                                </div>
+                        </div>
+                      </ng-template>
+            </div> <!-- .card -->
+          </div><!--/.col-->
+        </div>
+    </div>
+</div>
+</div><!-- /#right-panel -->
+<!-- Right Panel -->
+</div>
+
+
+
+

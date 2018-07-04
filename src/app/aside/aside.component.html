@@ -25,8 +25,8 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Clients de l'agence</a>
                   <ul class="sub-menu children dropdown-menu">
                       <li><i class="fa fa-table"></i><a routerLink="/client" class="fs-menu" href="tables-basic.html">Ajouter un client</a></li>
-                      <li><i class="fa fa-table"></i><a class="fs-menu" href="tables-data.html">Clients confiance</a></li>
-                      <li><i class="fa fa-table"></i><a class="fs-menu" href="tables-data.html">Clients bloqués</a></li>
+                      <li><i class="fa fa-table"></i><a routerLink="/liste-client" class="fs-menu" href="tables-data.html">Liste clients</a></li>
+                      <li><i class="fa fa-table"></i><a routerLink="/liste-client" class="fs-menu" href="tables-data.html">Clients bloqués</a></li>
                   </ul>
               </li>
               <li class="menu-item-has-children dropdown">
@@ -34,7 +34,8 @@
                   <ul class="sub-menu children dropdown-menu">
                       <li><i class="fa fa-table"></i><a routerLink="/vehicule" class="fs-menu" href="tables-basic.html">Ajouter un véhicule</a></li>
                       <li><i class="fa fa-table"></i><a class="fs-menu" href="tables-data.html">liste de véhicule</a></li>
-                      <li><i class="fa fa-table"></i><a class="fs-menu" href="tables-data.html">Maintenance des véhicules</a></li>
+                      <li><i class="fa fa-table"></i><a routerLink="/revision" class="fs-menu" href="tables-data.html">Révision des véhicules</a></li>
+                      <li><i class="fa fa-table"></i><a routerLink="/fiche-maintenance"  class="fs-menu" href="tables-data.html">Maintenance des véhicules</a></li>
                   </ul>
               </li>
 
@@ -43,7 +44,7 @@
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Contrats</a>
                   <ul class="sub-menu children dropdown-menu">
-                      <li><i class="menu-icon fa fa-fort-awesome"></i><a  class="fs-menu" href="font-fontawesome.html">Nouvelle réservation</a></li>
+                      <li><i class="menu-icon fa fa-fort-awesome"></i><a  routerLink="/nouvelle-reservation" class="fs-menu" href="font-fontawesome.html">Nouvelle réservation</a></li>
                       <li><i class="menu-icon ti-themify-logo"></i><a routerLink="/location" class="fs-menu" href="font-themify.html">Nouvelle location</a></li>
                       <li><i class="menu-icon fa fa-fort-awesome"></i><a class="fs-menu" href="font-fontawesome.html">Liste contrats</a></li>
                       <li><i class="menu-icon ti-themify-logo"></i><a routerLink="/reservation" class="fs-menu" href="font-themify.html">Liste réservation</a></li>

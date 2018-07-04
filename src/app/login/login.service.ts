@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from './login.model';
 import { Observable } from 'rxjs';
+import { Constant } from '../common/util/constants';
 
 @Injectable()
 export class LoginService {
 
-    private baseUrl = '/oauth/token';
+    
     
 
     /**
@@ -32,14 +33,19 @@ export class LoginService {
             .set('grant_type', 'password')
         ;
 
-        return this._httpClient.post<any>(`${this.baseUrl}`, body, { headers: headers });
+        return this._httpClient.post<any>(`${Constant.oauth}`, body, { headers: headers });
     }
 
 
 
-    public doLogin(user:User)
+
+    public getCurrentUser()
     {
-         
+        const headers = new HttpHeaders()
+            .set('Authorization', localStorage.getItem('token'))
+        ; 
+
+        return this._httpClient.get<any>(`${Constant.baseUrl}`+Constant.currentUser, { headers: headers });
     }
 
 }

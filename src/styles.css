@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
 .fs-menu{
     font-size: 12px!important;
+}
+
+
+.table td, .table th {
+    padding: 6px;
+    font-size: 12px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
 }

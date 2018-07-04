@@ -1,0 +1,11 @@
+.client-endette{
+    background:#c51162;
+    color: white;
+}
+
+.table tr:hover{
+   color: black!important;
+}
+.client-bloques{
+    text-decoration: line-through blue;
+}
