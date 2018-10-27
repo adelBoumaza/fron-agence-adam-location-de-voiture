@@ -1,36 +1,82 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './common/authGuard/AuthGuard';
-import { VehiculeComponent } from './vehicule/vehicule.component';
-import { LocationComponent } from './location/location.component';
-import { ReservationComponent } from './reservation/component/reservation.component';
-import { NouvelleReservationComponent } from './reservation/component/nouvelleReservation.component';
-import { RevisionComponent } from './revision/revision.component';
-import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { ClientServiceResolver } from './common/resolver/client.resolve';
-import { ClientListeComponent } from './client/component/client.liste.component';
-import { ClientComponent } from './client/component/client.component';
+import { VehiculeResolver } from './common/resolver/vehicule.resolver';
+import { RevisionResolver } from './common/resolver/revision.resolver';
+import { AuthGuardLocation } from './common/authGuard/AuthGuardLocation';
+
 
 
 
 
 
 const routes: Routes = [
-    { path: 'login', component: LoginComponent},
-    { path: 'liste-client', component: ClientListeComponent,canActivate: [AuthGuard],
-        resolve : {listeClient : ClientServiceResolver}
+    {
+      path: 'login',
+      loadChildren : '../../src/app/login/login-module/login.module#LoginModule'
     },
-    { path: 'client', component: ClientComponent,canActivate: [AuthGuard] },
-    { path: 'reservation', component: ReservationComponent,canActivate: [AuthGuard] },
-    { path: 'nouvelle-reservation', component: NouvelleReservationComponent,canActivate: [AuthGuard] },
-    { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
-    { path: 'vehicule', component: VehiculeComponent,canActivate: [AuthGuard]},
-    { path: 'location', component: LocationComponent,canActivate: [AuthGuard]},
-    { path: 'revision', component: RevisionComponent,canActivate: [AuthGuard]},
-    { path: 'fiche-maintenance', component: MaintenanceComponent,canActivate: [AuthGuard]},
+    {
+      path: 'liste-client',
+      loadChildren : '../../src/app/client/module/client.liste.module#ListeClientModule',
+      canActivate: [AuthGuard],
+      resolve : {listeClient : ClientServiceResolver}
+    },
+    {
+      path: 'client',
+      loadChildren : '../../src/app/client/module/client.module#ClientModule',
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'revision',
+      loadChildren : '../../src/app/revision/revision-module/revision.module#RevisionModule',
+      canActivate: [AuthGuard],
+      resolve : {listeRevision: RevisionResolver}
+    },
+    {
+      path: 'vehicule',
+      loadChildren : '../../src/app/vehicule/vehicule-module/vehicule.module#VehiculeModule',
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'liste-vehicule',
+      loadChildren : '../../src/app/vehicule/vehicule-module/vehicule.liste.module#VehiculeListeModule',
+      canActivate: [AuthGuard],
+      resolve : {listeVehicule: VehiculeResolver}
+    },
+    {
+      path: 'reservation',
+      loadChildren : '../../src/app/reservation/reservation-module/reservation.liste.module#ReservationListeModule',
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'nouvelle-reservation',
+      loadChildren : '../../src/app/reservation/reservation-module/reservation.module#ReservationModule',
+      canActivate: [AuthGuard]
+    },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+    {
+      path: 'location',
+      loadChildren : '../../src/app/location/location-module/location.module#LocationModule',
+      canActivate: [AuthGuardLocation]
+    },
+    {
+      path: 'fiche-maintenance',
+      loadChildren : '../../src/app/maintenance/maintenance-module/maintenance.module#MaintenanceModule',
+      canActivate: [AuthGuard]
+    },
+    { path: 'liste-dettes',
+      loadChildren : '../../src/app/dette/dette-module/dette.module#DetteModule',
+      canActivate: [AuthGuard]
+    },
     { path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
 
-export const routing = RouterModule.forRoot(routes,{ useHash: true });
+// export const routing = RouterModule.forRoot(routes, { useHash: true });
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: []
+})
+  export class AppRoutingModule {}

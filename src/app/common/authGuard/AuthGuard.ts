@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { CanActivate,Router } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
 
 
@@ -14,14 +14,13 @@ export class AuthGuard implements CanActivate {
     }
 
     public canActivate(): boolean {
-        let retValue = true;
+        let retValue = false;
         if (localStorage.getItem('token') && localStorage.getItem('id'))  {
              retValue = true;
         } else {
              this._router.navigateByUrl('login');
             retValue = false;
         }
-        
         return retValue;
     }
 }

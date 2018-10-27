@@ -1,0 +1,15 @@
+.statutPaye
+{
+    background: #18b958!important;
+    color: white;
+}
+
+.statutNonPaye{
+    background:#e22621!important;
+    color: white;
+}
+.font-ticket{
+    margin-bottom: 5px;
+    color: black;
+    font-family: ticket;
+}

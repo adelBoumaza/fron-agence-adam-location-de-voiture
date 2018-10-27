@@ -25,6 +25,19 @@
                   <!-- Credit Card -->
                   <div id="pay-invoice">
                       <div class="card-body">
+                        <div  *ngIf="confirmChargement" class="container" style="text-align: center;">
+                                <img  [src]="chargement">
+                        </div>
+                        <div *ngIf="confirmError" id="display-error">
+                                <img [src]="ICON_ERROR" alt="Error" /> 
+                                {{messageSuccess}}
+                        </div>
+                        <div *ngIf="confirmSuccess" id="display-success">
+                                <img [src]="ICON_SUCCESS" alt="Success" />
+                                 {{messageSuccess}}
+                        </div>
+                        <div *ngIf="confirm">
+                            <form #updateForm="ngForm">     
                             <div class="form-group text-center">
                                   <ul class="list-inline">
                                       <img  [src]="ICON_REVISION_PATH"  style="margin: auto">
@@ -35,24 +48,24 @@
                                 <div class="col-3">
                                         <div class="form-group  input-group-sm">
                                                 <label for="vidange" class="control-label mb-1 fs-menu">Vidange</label>
-                                                <input id="vidange" name="vidange" type="text" class="form-control">
+                                                 <input [(ngModel)]="revision.vidange" required id="vidange" name="vidange" type="text" class="form-control">
                                         </div>
                                 </div>
                                 <div class="col-3">
                                         <div class="form-group input-group-sm">
-                                                  <label for="fa" class="control-label mb-1 fs-menu">Filtre à air</label>
-                                                  <input id="fa" name="fa" type="text" class="form-control">
+                                                <label for="fa" class="control-label mb-1 fs-menu">Filtre à air</label>
+                                                <input [(ngModel)]="revision.filtreAair" required id="fa" name="fa" type="text" class="form-control">
                                         </div>
                               </div>
                               <div class="col-3">
                                   <div class="form-group input-group-sm">
                                             <label for="fh" class="control-label mb-1 fs-menu">Filtre à huile</label>
-                                            <input id="fh" name="fh" type="text" class="form-control">
+                                             <input [(ngModel)]="revision.filtreAhuile" required id="fh" name="fh" type="text" class="form-control">
                                   </div>
                               </div>
                               <div class="col-3 input-group-sm">
                                     <label for="fg" class="control-label mb-1 fs-menu">Filtre à gasoil</label>
-                                    <input id="fg" name="fg" type="text" class="form-control">
+                                     <input [(ngModel)]="revision.filtreAgasoil" id="fg" name="fg" type="text" class="form-control">
                               </div>
                             </div>
                             <hr>
@@ -60,24 +73,24 @@
                                 <div class="col-3">
                                         <div class="form-group  input-group-sm">
                                                 <label for="bougies" class="control-label mb-1 fs-menu">Bougies allumage</label>
-                                                <input id="bougies" name="bougies" type="text" class="form-control">
+                                                 <input [(ngModel)]="revision.bougiesAllumage"  required id="bougies" name="bougies" type="text" class="form-control">
                                         </div>
                                 </div>
                                 <div class="col-3">
                                         <div class="form-group input-group-sm">
                                                   <label for="kt" class="control-label mb-1 fs-menu">Kit de distribution</label>
-                                                  <input id="kt" name="kt" type="text" class="form-control">
+                                                   <input [(ngModel)]="revision.kitDistribution" required id="kt" name="kt" type="text" class="form-control">
                                         </div>
                               </div>
                               <div class="col-3">
                                   <div class="form-group input-group-sm">
                                             <label for="ke" class="control-label mb-1 fs-menu">Kit d'embrayage</label>
-                                            <input id="ke" name="ke" type="text" class="form-control">
+                                             <input [(ngModel)]="revision.kitDembrayage" required id="ke" name="ke" type="text" class="form-control">
                                   </div>
                               </div>
                               <div class="col-3 input-group-sm">
                                     <label for="cdp" class="control-label mb-1 fs-menu">Suspensions</label>
-                                    <input id="cdp" name="cdp" type="text" class="form-control">
+                                     <input [(ngModel)]="revision.suspensions" required id="cdp" name="cdp" type="text" class="form-control">
                               </div>
                           </div>
                           <hr>
@@ -85,147 +98,95 @@
                               <div class="col-3">
                                       <div class="form-group  input-group-sm">
                                               <label for="plq" class="control-label mb-1 fs-menu">Plaquettes</label>
-                                              <input id="plq" name="plq" type="text" class="form-control">
+                                               <input [(ngModel)]="revision.plaquettes" required id="plq" name="plq" type="text" class="form-control">
                                       </div>
                               </div>
                               <div class="col-3">
                                       <div class="form-group input-group-sm">
                                                 <label for="pneus" class="control-label mb-1 fs-menu">Pneus</label>
-                                                <input id="pneus" name="pneus" type="text" class="form-control">
+                                                 <input [(ngModel)]="revision.pneus" required id="pneus" name="pneus" type="text" class="form-control">
                                       </div>
                               </div>
                               <div class="col-3">
                                 <div class="form-group input-group-sm">
                                           <label for="rlm" class="control-label mb-1 fs-menu">Roulements</label>
-                                          <input id="rlm" name="rlm" type="text" class="form-control">
+                                           <input [(ngModel)]="revision.roulements" required id="rlm" name="rlm" type="text" class="form-control">
                                 </div>
                               </div>
                               <div class="col-3 input-group-sm">
                                   <label for="rotules" class="control-label mb-1 fs-menu">Rotules</label>
-                                  <input id="rotules" name="rotules" type="text" class="form-control">
+                                   <input [(ngModel)]="revision.rotules" required id="rotules" name="rotules" type="text" class="form-control">
                               </div>
                         </div>
                         <hr>
-                        <div class="card-body">
-                            <button style="margin-right: 20px" type="button" class="btn btn-success"><i class="fa fa-magic"></i>&nbsp; Enregistrer</button>
-                            <button type="button" class="btn btn-warning"><i class="fa fa-map-marker"></i>&nbsp; Annuler</button>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                        <div class="card">
+                                          <div id="pay-invoice">
+                                              <div class="card-body">
+                                                    <div style="margin-bottom: 20px" class="col-lg-8">
+                                                          <button [disabled]="!updateForm.valid" (click)="updateRevision();" id="payment-button" type="submit" class="btn btn-outline-info btn-block">
+                                                              <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                              <span id="payment-button-amount">
+                                                                  Modifier
+                                                              </span>
+                                                          </button>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                          <button   class="btn btn-outline-danger btn-block" type="button" (click)="annuler();">
+                                                                <span id="payment-button-amountR">
+                                                                    Annuler
+                                                                </span>
+                                                          </button>
+                                                    </div>
+                                              </div>
+                                          </div>
+                                        </div> <!-- .card -->
+                                </div>
+                            </div>
+                        </form>
                         </div>
                         <hr>
                           <h5 style="text-align: center">configuration de la révision du parc</h5>
                         <br> 
                         <div class="row">
-                          <div class="col-3">
+                          <div class="col-4">
                               <div class="form-group  input-group-sm">
                                       <label for="voiture" class="control-label mb-1 fs-menu">Rechercher une voiture</label>
-                                      <input id="voiture" name="voiture" type="text" class="form-control">
+                                      <input [(ngModel)]="filterQuery" id="voiture" name="voiture" placeholder="Rechercher par modéle ..." type="text" class="form-control">
                               </div>
                           </div>
                         </div>
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                  <tr>
-                                    <th>Voiture</th>
-                                    <th>immatricule</th>
-                                    <th>Filtre à air</th>
-                                    <th>Filtre à huile</th>
-                                    <th>Plaquettes</th>
-                                    <th>Bougies</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>Renault - Clio</td>
-                                    <td>OO-01-54657</td>
-                                    <td>10000</td>
-                                    <td>30000</td>
-                                    <td>10000</td>
-                                    <td>30000</td>
-                                    <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Renault - Clio</td>
-                                      <td>OO-01-54657</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td>10000</td>
-                                      <td>30000</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                       
+                        <table class="table table-hover table-bordered">
+                                <tr>
+                                        <th>Marque</th>
+                                        <th>Modèle</th>
+                                        <th>Immatricule</th>
+                                        <th>Couleur</th>
+                                        <th>Vidange</th>
+                                        <th>Filtre à air</th>
+                                        <th>Filtre à huile</th>
+                                        <th>Plaquettes</th>
+                                        <th>Action</th>
+                                </tr>
+                                <tr  *ngFor="let item of listeRevision | myfilterVehicule : filterQuery | paginate: { itemsPerPage: 10, currentPage: firstPage} ;let i = index">
+                                        <td>{{item.marque | uppercase}}</td>
+                                        <td>{{item.modele}}</td>
+                                        <td>{{item.immatricule}}</td>
+                                        <td [style.background-color]="item.couleur"></td>
+                                        <td>{{item.vidange}}</td>
+                                        <td>{{item.filtreAair}}</td>
+                                        <td>{{item.filtreAhuile}}</td>
+                                        <td>{{item.plaquettes}}</td>
+                                        <td style="background: white!important">
+                                                <button (click)="findOneRevision(item)"  style="background: #42c5e1!important;color: white" class="btn btn-block btn-sm">Editer</button>
+                                        </td>
+                                        
+                                </tr>
+                        </table>
+                        <pagination-controls previousLabel="Précédent"
+                                nextLabel="Suivant" class="my-pagination" (pageChange)="firstPage = $event"></pagination-controls>
                     </div>
                 </div>
                 </div>

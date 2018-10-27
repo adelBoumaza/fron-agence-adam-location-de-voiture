@@ -14,6 +14,19 @@
             </div>
         </div>
   <div class="content mt-3">
+        <div  *ngIf="confirmChargement" class="container" style="text-align: center;">
+                <img  [src]="chargement">
+        </div>
+        <div *ngIf="existError" id="display-error">
+                <img [src]="ICON_ERROR" alt="Error" /> 
+                {{success}}
+        </div>
+        <div *ngIf="existSuccess" id="display-success">
+                <img [src]="ICON_SUCCESS" alt="Success" />
+                {{success}}
+        </div>
+        <br>
+    <form #saveVehiculeForm="ngForm">
     <div class="animated fadeIn">
         <div class="row">
           <div class="col-lg-12">
@@ -91,7 +104,7 @@
                                                     </div>
                                             </div> 
                                             <div>
-                                                <span class="control-label mb-1 fs-menu" *ngIf="marqueSelected !== '' ">la marque sélectionnée est :{{marqueSelected}} </span>
+                                                <span class="control-label mb-1 fs-menu" *ngIf="vehicule.marque !== '' ">la marque sélectionnée est :{{vehicule.marque}} </span>
                                             </div>
                                       </ng-template>
                                     </ngb-panel>
@@ -99,7 +112,7 @@
                                       <ng-template ngbPanelContent>
                                             <div class="col-3 input-group-sm">
                                                     <label for="marque" class="control-label mb-1 fs-menu">Marque</label>
-                                                    <select class="form-control selectpicker" [(ngModel)]="marqueSelected" name="ftr" id="ftr">
+                                                    <select required class="form-control selectpicker" [(ngModel)]="vehicule.marque" name="ftr" id="ftr">
                                                             <option  *ngFor="let f of tabMarque" [ngValue]="f">
                                                                     {{f}}  
                                                             </option>
@@ -111,23 +124,29 @@
                             </ngb-accordion>
                             <br>
                             <div class="row ">
-                                 <div class="col-4 input-group-sm">
+                                 <div class="col-3 input-group-sm">
                                         <label for="model" class="control-label mb-1 fs-menu">Modèle</label>
-                                        <input id="model" name="model" type="text" class="form-control">
+                                        <input required  [(ngModel)]="vehicule.modele" id="model" name="model" type="text" class="form-control">
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                         <div class="form-group input-group-sm">
                                                   <label for="Immatricule" class="control-label mb-1 fs-menu">Immatricule</label>
-                                                  <input id="Immatricule" name="Immatricule" type="text" class="form-control">
+                                                  <input required [(ngModel)]="vehicule.immatricule" id="Immatricule" name="Immatricule" type="text" class="form-control">
                                         </div>
                                 </div>
-                              <div class="col-4 input-group-sm">
+                              <div class="col-3 input-group-sm">
                                     <label for="Caisse" class="control-label mb-1 fs-menu">Type véhicule</label>
-                                    <select name="Caisse" id="Caisse" class="form-control">
+                                    <select required [(ngModel)]="vehicule.typeVehicule" name="Caisse" id="Caisse" class="form-control">
                                             <option value="0">Please select</option>
-                                            <option value="1">Touristique</option>
-                                            <option value="2">Commerciale</option>
+                                            <option value="Touristique">Touristique</option>
+                                            <option value="Commerciale">Commerciale</option>
                                     </select>
+                              </div>
+                              <div class="col-3">
+                                    <div class="form-group input-group-sm">
+                                              <label for="prixLocation" class="control-label mb-1 fs-menu">Prix Location</label>
+                                              <input required [(ngModel)]="vehicule.prixLocation" id="prixLocation" name="prixLocation" type="text" class="form-control">
+                                    </div>
                               </div>
                              
                             </div>
@@ -135,27 +154,28 @@
                             <div class="row">
                                 <div class="col-3">
                                   <div class="form-group input-group-sm">
-                                    <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">Prix d'achat</label>
-                                    <input id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
+                                    <label for="prixAchatV" class="control-label mb-1 fs-menu">Prix d'achat</label>
+                                    <input required [(ngModel)]="vehicule.prixAchat" id="prixAchatV" name="prixAchatV" type="text" class="form-control">
                                   </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group input-group-sm" style="display: inline-grid!important;">
-                                            <label for="couleur" class="control-label mb-1 fs-menu">Coulour</label>
-                                            <input class="col-12" (colorPickerChange)="onChangeColor($event)"  [(colorPicker)]="color" [style.background]="color"/>
+                                            <label for="couleur" class="control-label mb-1 fs-menu">Couleur</label>
+                                            <input  [cpPresetColors]="['#fff', '#000', '#6e7f80', '#36454f', '#708090', '#D3D3D3']"
+                                             class="col-12" (colorPickerChange)="onChangeColor($event)"  [(colorPicker)]="vehicule.couleur" [style.background]="vehicule.couleur"/>
                                            
                                     </div>
                                 </div>
                                 <div class="col-3">
                                       <div class="form-group input-group-sm">
-                                        <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">Kilommétrage actuel</label>
-                                        <input id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
+                                        <label for="km" class="control-label mb-1 fs-menu">Kilommétrage actuel</label>
+                                        <input required [(ngModel)]="vehicule.kilommetrage" id="km" name="km" type="text" class="form-control">
                                       </div>
                                 </div>
                                 <div class="col-3">
                                         <div class="form-group input-group-sm">
-                                          <label for="coulour" class="control-label mb-1 fs-menu">Carburant actuel</label>
-                                          <input id="coulour" name="coulour" type="text" class="form-control">
+                                          <label for="carburant" class="control-label mb-1 fs-menu">Carburant actuel</label>
+                                          <input  [(ngModel)]="vehicule.carburantActuel" id="carburant" name="carburant" type="text" class="form-control">
                                         </div>
                                 </div>
                             </div>
@@ -166,54 +186,60 @@
                                             <div class="col col-md-9">
                                               <div class="form-check-inline form-check">
                                                 <label for="inline-radio1" class="form-check-label fs-menu" style="padding-right: 30px;font-weight: bold">
-                                                  <input type="radio" id="inline-radio1" name="inline-radios" value="option1" class="form-check-input">Essance
+                                                  <input [(ngModel)]="vehicule.energie" type="radio" id="inline-radio1" name="inline-radios" value="Essance" class="form-check-input">Essance
                                                 </label>
                                                 <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
-                                                  <input type="radio" id="inline-radio2" name="inline-radios" value="option2" class="form-check-input">Diesel
+                                                  <input [(ngModel)]="vehicule.energie" type="radio" id="inline-radio2" name="inline-radios" value="Diesel" class="form-check-input">Diesel
                                                 </label>
                                                 <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
-                                                        <input type="radio" id="inline-radio2" name="inline-radios" value="option3" class="form-check-input">GPL
-                                                      </label>
+                                                    <input [(ngModel)]="vehicule.energie" type="radio" id="inline-radio2" name="inline-radios" value="GPL" class="form-check-input">GPL
+                                                </label>
                                               </div>
                                             </div>
                                     </div>
                                     <div class="col-3">
                                       <div class="form-group input-group-sm">
                                         <label for="roueDessecours" class="control-label mb-1 fs-menu">Contient la roue de secours ?</label>
-                                        <select name="roueDessecours" id="roueDessecours" class="form-control">
+                                        <select required [(ngModel)]="vehicule.roueDeSecours" name="roueDessecours" id="roueDessecours" class="form-control">
                                                 <option value="0">Please select</option>
-                                                <option value="1">Oui</option>
-                                                <option value="2">Non</option>
+                                                <option value="true">Oui</option>
+                                                <option value="false">Non</option>
                                         </select>
                                       </div>
                                     </div>
                                     <div class="col-3">
                                             <div class="form-group input-group-sm">
                                               <label for="anneF" class="control-label mb-1 fs-menu">Année de fabrication</label>
-                                              <input id="anneF" name="anneF" type="text" class="form-control">
+                                              <input  [(ngModel)]="vehicule.anneeFabrication" id="anneF" name="anneF" type="text" class="form-control">
                                             </div>
                                     </div>
                             </div>
                             <hr>
                         
-                                <button (click)="open(content)" class="btn btn-outline-danger btn-sm">
+                                <button (click)="open(content)" class="btn btn-primary btn-sm" style="color: white;">
                                        Déclarer une nouvelle assurance
                                 </button>
                                 <br><br>
-                                <table class="table table-hover table-bordered">
-                                    <tr>
-                                        <th>N° assurance</th>
-                                        <th>Date de déclaration</th>
-                                        <th>Date d'expiration</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>11/01/2018</td>
-                                        <td>11/01/2019</td>
-                                        <td>40000</td>
-                                    </tr>
-                                </table>  
+                                <div *ngIf="listeAssurance?.length > 0">
+                                    <table class="table table-hover table-bordered">
+                                        <tr>
+                                            <th>N° assurance</th>
+                                            <th>Date d'expiration</th>
+                                            <th>Type d'assurance</th>
+                                            <th>Prix</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        <tr *ngFor="let item of listeAssurance;let i=index" [ngClass]="{'expirationAssurance':item.expiration}">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.dateExpiration}}</td>
+                                            <td>{{item.typeAssurance}}</td>
+                                            <td>{{item.prixAchat}}</td>
+                                            <td style="background: white!important">
+                                                    <button [disabled]="item.expiration" (click)="deleteAssurance(item)"  style="background: #e1424a!important;color: white" class="btn btn-block btn-sm">Supprimer</button>
+                                            </td>
+                                        </tr>
+                                    </table> 
+                                </div> 
                                 <br>
                                 <!--modal-->
                             <ng-template #content let-c="close" let-d="dismiss">
@@ -231,38 +257,39 @@
                                     </div>
                                     <div class="modal-body">
                                             <div class="form-group">
-                                                    <div class="form-group input-group-sm col-12">
-                                                            <label for="dateExp" class="control-label mb-1 fs-menu">Date d'expiration</label>
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                  <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                         name="dr" [(ngModel)]="dateExp" ngbDatepicker #dateR="ngbDatepicker">
-                                                                  <div class="input-group-append">
-                                                                        <button class="btn btn-outline-secondary" (click)="dateR.toggle()" type="button">
-                                                                            <li class="list-inline-item" style="cursor: pointer;">
-                                                                                <i class="fa fa-calendar-times-o fa-2x"></i>
-                                                                            </li>
-                                                                        </button>
-                                                                  </div>
+                                                    <div *ngIf="!confirmAddAssurance" class="col-lg-12">
+                                                        <div class="card">
+                                                            <div id="pay-invoice">
+                                                                <div class="card-body">
+                                                                    <div class="control-label mb-1 fs-menu" style="color: red;text-align: center;">     
+                                                                            Tous les champs sont obligatoires, le prix ne peut pas être 0 et la date d'expiration ne peût pas être inférieur à aujourd'hui. 
+                                                                    </div>
                                                                 </div>
-                                                              </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-12">
                                                             <div class="form-group input-group-sm">
-                                                                <label for="roueDessecours" class="control-label mb-1 fs-menu">Type de l'assurance</label>
-                                                                <select name="roueDessecours" id="roueDessecours" class="form-control">
+                                                                <label for="prix" class="control-label mb-1 fs-menu">Date d'expiration <span style="color: red">*</span></label>
+                                                                <input [(ngModel)]="assurance.dateExpiration"  id="de" name="de" type="date" class="form-control">
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                            <div class="form-group input-group-sm">
+                                                                <label for="typeAssurance" class="control-label mb-1 fs-menu">Type de l'assurance <span style="color: red">*</span></label>
+                                                                <select [(ngModel)]="assurance.typeAssurance" name="typeAssurance" id="typeAssurance" class="form-control">
                                                                         <option value="0">Please select</option>
-                                                                        <option value="1">Formule TOUT EN 1 (la tous risques)</option>
-                                                                        <option value="2">Formule CLASSIC AUTO (la dommage collision)</option>
-                                                                        <option value="2">Formule CLASSIC + (la dommage collision à valeur réelle)</option>
+                                                                        <option value="Formule TOUT EN 1 (la tous risques)">Formule TOUT EN 1 (la tous risques)</option>
+                                                                        <option value="Formule CLASSIC AUTO (la dommage collision)">Formule CLASSIC AUTO (la dommage collision)</option>
+                                                                        <option value="Formule CLASSIC + (la dommage collision à valeur réelle)">Formule CLASSIC + (la dommage collision à valeur réelle)</option>
                                                                 </select>
                                                             </div>
                                                     </div>
                                                     <br>
                                                     <div class="col-12">
                                                             <div class="form-group input-group-sm">
-                                                                <label for="prix" class="control-label mb-1 fs-menu">Prix de l'assurance</label>
-                                                                <input id="prix" name="prix" type="text" class="form-control">
+                                                                <label for="prix" class="control-label mb-1 fs-menu">Prix de l'assurance <span style="color: red">*</span></label>
+                                                                <input [(ngModel)]="assurance.prixAchat" id="prix" name="prix" type="text" class="form-control">
                                                             </div>
                                                     </div>
                                                     <br>
@@ -271,15 +298,16 @@
                                                     <hr>
                                                     <br>
                                                     <div class="form-group text-center" >
-                                                            <button type="button" class="btn btn-outline-info btn-sm">Ajouter une nouvelle assurance</button>
+                                                            <button style="color: white;" (click)="addAssurance();confirmAddAssurance > 0 && c('Cross click')" type="button" class="btn btn-primary btn-sm">Ajouter une nouvelle assurance</button>
                                                     </div>
                                             </div>
                                     </div>
                             </ng-template>
                             <div class="form-group">
                                     <label for="observation" class="control-label mb-1 fs-menu">Observation sur la voiture</label>
-                                    <textarea id="observation" rows="10" name="observation" type="text" class="form-control"></textarea>
+                                    <textarea  [(ngModel)]="vehicule.observation" id="observation" rows="10" name="observation" type="text" class="form-control"></textarea>
                             </div>
+                           
                       </div>
                       <hr>
                   </div>
@@ -287,15 +315,22 @@
                         <div class="card">
                               <div id="pay-invoice">
                                   <div class="card-body">
-                                      <form action="" method="post" novalidate="novalidate">
-                                          <div>
-                                              <button id="payment-button" type="submit" class="btn btn-outline-info btn-block">
+                                        <div [ngClass]="(btnSave) ? 'col-lg-12':'col-lg-8'" style="margin-bottom: 20px">
+                                              <button [disabled]="!saveVehiculeForm.valid" (click)="addVehicule()" id="payment-button" type="submit" class="btn btn-outline-info btn-block">
                                                   <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                  <span id="payment-button-amount">Enregistrer</span>
-                                                  <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                  <span id="payment-button-amount">
+                                                        <i *ngIf="btnSave">Enregistrer</i>
+                                                        <i *ngIf="!btnSave">Modifier</i>
+                                                  </span>
                                               </button>
                                           </div>
-                                      </form>
+                                          <div *ngIf="!btnSave" class="col-lg-4">
+                                                <button   class="btn btn-outline-danger btn-block" type="button" (click)="redirectToPageListeVehicule();">
+                                                      <span id="payment-button-amountR">
+                                                          <i *ngIf="!btnSave">Retour</i>
+                                                      </span>
+                                                </button>
+                                            </div>
                                   </div>
                               </div>
                         </div> <!-- .card -->
@@ -307,6 +342,7 @@
           
         </div>
     </div>
+</form>
 </div>
 </div><!-- /#right-panel -->
 <!-- Right Panel -->

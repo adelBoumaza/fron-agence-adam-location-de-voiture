@@ -11,37 +11,32 @@ import { ClientService } from '../service/client.service';
     ]
 })
 export class ClientListeComponent implements OnInit {
-    
-   clients :any;
+   clients: any;
    ICON_MONEY = '../../../assets/icon/icon-money.png';
-   totalDette :number = 0;
+   totalDette: number = 0;
 
-  
-   constructor(private _clientService:ClientService,
-               private _routing:Router,
-               private _route:ActivatedRoute)
-    {
+   constructor(private _clientService: ClientService,
+               private _routing: Router,
+               private _route: ActivatedRoute) {
         this._clientService.clientObject = null;
     }
 
-   ngOnInit(){
+   ngOnInit() {
         this.loadData();
    }
-   loadData()
-   {
+   loadData() {
     this.clients = this._route.snapshot.data['listeClient'];
     this.calculateDette(this.clients);
    }
-   calculateDette(data)
-   {
+   calculateDette(data) {
         data.forEach(element => {
-            if(element.sommeDette != null)
+            if (element.sommeDette != null) {
                  this.totalDette = this.totalDette + element.sommeDette;
+            }
     });
    }
 
-   findOneClient(item)
-   {
+   findOneClient(item) {
         this._clientService.clientObject = item;
         this._routing.navigate(['client']);
    }

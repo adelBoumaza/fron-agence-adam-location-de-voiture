@@ -7,9 +7,6 @@ import { Constant } from '../common/util/constants';
 @Injectable()
 export class LoginService {
 
-    
-    
-
     /**
      * Constructor
      * @param _httpClient

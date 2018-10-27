@@ -5,25 +5,27 @@ import { Client } from '../model/client.model';
 import { Constant } from '../../common/util/constants';
 
 
-@Injectable()
+@Injectable(
+    {providedIn : 'root'}
+)
 export class ClientService {
     /**
      * Constructor
      * @param _httpClient
      */
-    constructor(private _api : ApiAgenceAdamService) {
+    constructor(private _api: ApiAgenceAdamService) {
     }
 
-    clientObject : Client;
+    clientObject: Client;
 
-    public findAllClient():Observable<any>
+    public findAllClient(): Observable<any>
     {
 
-        return this._api.GET('/client/findAll') ;
+        return this._api.GET(Constant.findAllClient) ;
     }
 
-    public saveClient(client : Client,save : boolean)
+    public saveClient(client: Client, save: boolean)
     {
-        return this._api.POST(client,Constant.saveClientUrl+'/'+client.idUser+'/'+save);
+        return this._api.POST(client, Constant.saveClientUrl + '/' + client.idUser + '/' + save);
     }
 }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../service/client.service';
 import { Client } from '../model/client.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UtilitaireService } from '../../common/util/utilitaire';
+import {DateAdapter, MatIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
+
 
 
 
@@ -17,25 +20,31 @@ import { UtilitaireService } from '../../common/util/utilitaire';
 })
 export class ClientComponent  implements OnInit {
 
-  client : Client = {} as Client;
+  client: Client = {} as Client;
   settingsForm: FormGroup;
-  success : string;
-  existError:boolean;
+  success: string;
+  existError: boolean;
+  existSuccess: boolean;
   chargement = '../../../assets/icon/chargement.gif';
-  confirmChargement:boolean = false;
-  btnSave :boolean;
-  rateNote :number = 0;
-  
-  constructor(private _clientService:ClientService,
-              private utilitaireService:UtilitaireService,
+  confirmChargement: Boolean = false;
+  btnSave: boolean;
+  rateNote: number = 0;
+  ICON_ERROR = '../../../assets/icon/error.png';
+  ICON_SUCCESS = '../../../assets/icon/correct.png';
+  ICON_HAPPY = '../../../assets/icon/happy.png';
+
+  constructor(private _clientService: ClientService,
+              private adapter: DateAdapter<any>,
+              private utilitaireService: UtilitaireService,
               private _router: Router,
-              private fb: FormBuilder)
-  {
+              private iconRegistry: MatIconRegistry,
+              private sanitizer: DomSanitizer,
+              private fb: FormBuilder) {
+    this.adapter.setLocale('fr');
      // create form group using the form builder
     this.initModel(fb);
     this.btnSave = true;
-    if(_clientService.clientObject != null)
-    {
+    if (_clientService.clientObject != null) {
       this.btnSave = false;
       this.client = _clientService.clientObject;
       this.rateNote = this.client.note;
@@ -53,32 +62,29 @@ export class ClientComponent  implements OnInit {
           numeroPasseport: this.client.numeroPasseport,
           dateObtentionPermis: this.client.dateObtentionPermis ,
           dateObtentionPassport: this.client.dateObtentionPassport  ,
-          lieuObtentionPermis:this.client.lieuObtentionPermis ,
+          lieuObtentionPermis: this.client.lieuObtentionPermis ,
           lieuObtentionPasseport: this.client.lieuObtentionPasseport  ,
           observation : this.client.observation ,
-          note :this.client.note,
+          note : this.client.note,
           actived : this.client.actived,
           endette : this.client.endette,
           sommeDette : this.client.sommeDette,
           clientBloque : this.client.clientBloque,
-          idUser : localStorage.getItem('id') 
+          idUser : localStorage.getItem('id')
       });
-      
     }
-   
   }
 
-  initModel(fb: FormBuilder)
-  {
+  initModel(fb: FormBuilder) {
     this.settingsForm = this.fb.group({
-        nom: ''  ,
-        prenom: ''  ,
-        dateDeNaissance: ''  ,
+        nom: ['', Validators.required] ,
+        prenom: ['', Validators.required],
+        dateDeNaissance: ['', Validators.required],
         lieuDeNaissance : '',
-        adresse : ''  ,
-        email : ''  ,
-        numeTelOne: ''  ,
-        numTelTwo: ''  ,
+        adresse : ['', Validators.required],
+        email : ['', Validators.email] ,
+        numeTelOne: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12), Validators.pattern('[0-9]+')]] ,
+        numTelTwo: ['',  [Validators.minLength(10), Validators.maxLength(12), Validators.pattern('[0-9]+')]] ,
         typeClient : true,
         numeroDePermis: ''  ,
         numeroPasseport: '',
@@ -87,34 +93,34 @@ export class ClientComponent  implements OnInit {
         lieuObtentionPermis: ''  ,
         lieuObtentionPasseport: ''  ,
         observation : ''  ,
-        note :0,
+        note : 0,
         actived : true,
         endette : false,
         sommeDette : 0,
         clientBloque : false,
-        idUser : localStorage.getItem('id') 
+        idUser : localStorage.getItem('id')
      });
   }
 
-  init():void{
+
+  init(): void {
     this.confirmChargement = false;
     this.existError = false;
+    this.existSuccess = false;
   }
   ngOnInit() {
     Object.assign(this.client);
     this.init();
-    
   }
-  reset()
-  {
+  reset() {
     this.settingsForm.reset({
-        nom: ''  ,
-        prenom: ''  ,
-        dateDeNaissance: ''  ,
+        nom: '' ,
+        prenom: '',
+        dateDeNaissance: '',
         lieuDeNaissance : '',
-        adresse : ''  ,
-        email : ''  ,
-        numeTelOne: ''  ,
+        adresse : '',
+        email : '' ,
+        numeTelOne: '',
         numTelTwo: ''  ,
         typeClient : true,
         numeroDePermis: ''  ,
@@ -124,48 +130,52 @@ export class ClientComponent  implements OnInit {
         lieuObtentionPermis: ''  ,
         lieuObtentionPasseport: ''  ,
         observation : ''  ,
-        note :0,
+        note : 0,
         actived : true,
         endette : false,
         sommeDette : 0,
         clientBloque : false,
-        idUser : localStorage.getItem('id') 
+        idUser : localStorage.getItem('id')
     });
     this.confirmChargement = false;
+    // this.settingsForm.updateValueAndValidity({onlySelf: true});
   }
 
-  submitForm()
-  {
+  submitForm() {
+       // stop here if form is invalid
+       if (this.settingsForm.invalid) {
+        return;
+      }
       this.confirmChargement = true;
       // update the model
       this.updateModel(this.settingsForm.value);
-      this.client.dateDeNaissance       = this.utilitaireService.formattedDate(this.client.dateDeNaissance);
-      this.client.dateObtentionPassport = this.utilitaireService.formattedDate(this.client.dateObtentionPassport);
-      this.client.dateObtentionPermis   = this.utilitaireService.formattedDate(this.client.dateObtentionPermis);
-      //verify form save or update 
-      if(!this.btnSave && this._clientService.clientObject != null)
-      {
+      this.client.dateDeNaissance       = this.utilitaireService.formatDateMaterial(this.client.dateDeNaissance);
+      this.client.dateObtentionPassport = this.utilitaireService.formatDateMaterial(this.client.dateObtentionPassport);
+      this.client.dateObtentionPermis   = this.utilitaireService.formatDateMaterial(this.client.dateObtentionPermis);
+      // verify form save or update
+      if (!this.btnSave && this._clientService.clientObject != null) {
          this.client.id   = this._clientService.clientObject.id;
          this.client.note = this.rateNote;
       }
-      //call service for save client
-     this._clientService.saveClient(this.client,this.btnSave)
-      .subscribe(response =>
-      {
+      // call service for save client
+     this._clientService.saveClient(this.client, this.btnSave)
+      .subscribe(response => {
             this.success = 'le client à bien été criéé avec success';
+            this.existSuccess = true;
+            this.existError = false;
             this.reset();
-            if(!this.btnSave)
-            {
+            if (!this.btnSave) {
               this.success = 'le client à bien été modifié avec success';
               setTimeout(() => {
                 this._router.navigateByUrl('liste-client');
               }, 1000);
             }
-      },error =>
+      }, error =>
       {
         this.existError = true;
+        this.existSuccess = false;
         this.confirmChargement = false;
-        if(error.status == '417')
+        if(error.status === '417')
         {
             this.success = error.error.message;
         }else
@@ -176,19 +186,17 @@ export class ClientComponent  implements OnInit {
       window.scrollTo(0, 0);
   }
 
-  updateModel(values:Object)
-  {
-      Object.assign(this.client,values);
+  updateModel(values: Object) {
+      Object.assign(this.client, values);
   }
 
-  //redirect vers la page liste client
+   // convenience getter for easy access to form fields
+   get forms() { return this.settingsForm.controls;}
 
-  redirectPageListeClient()
-  {
+  redirectPageListeClient() {
     window.scrollTo(0, 0);
     this.confirmChargement = true;
     this._router.navigateByUrl('liste-client');
   }
- 
 
 }

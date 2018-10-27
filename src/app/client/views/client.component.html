@@ -15,15 +15,20 @@
             </div>
            
       <div class="content mt-3">
+            
         <form #saveClientForm="ngForm" [formGroup]="settingsForm" (ngSubmit)="submitForm()">
                 <div  *ngIf="confirmChargement" class="container" style="text-align: center;">
-                        <img  [src]="chargement">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                 </div>
-                <div  *ngIf="success != null || success != '' " style="text-align: center;">
-                        <div [ngClass]="{'alert alert-danger': existError,'alert alert-info': !existError}">
-                                {{success}}
-                        </div>  
+                <div  *ngIf="existError" id="display-error">
+                        <img [src]="ICON_ERROR" alt="Error" /> 
+                        {{success}}
                 </div>
+                <div *ngIf="existSuccess" id="display-success">
+                        <img [src]="ICON_SUCCESS" alt="Success" />
+                        {{success}}
+                </div>
+                <br>
         <div class="animated fadeIn">
             <div class="row">
               <div class="col-lg-6">
@@ -41,50 +46,72 @@
                                       </ul>
                                   </div>
                                   <hr>
-                                  <div class="form-group input-group-sm">
-                                      <label for="cc-payment" class="control-label mb-1 fs-menu">Nom</label>
-                                      <input  required id="cc-pament" formControlName="nom" name="nom" type="text" class="form-control">
-                                  </div>
-                                  <div class="form-group input-group-sm">
-                                    <label for="prenom" class="control-label mb-1 fs-menu">Prénom</label>
-                                    <input   required id="prenom" formControlName="prenom" name="prenom" type="text" class="form-control">
+                                  <div class="row">
+                                        <div class="col-6">
+                                            <div>
+                                                <mat-form-field>
+                                                    <input  matInput placeholder="Nom"  id="cc-pament" formControlName="nom" name="nom" type="text">
+                                                    <mat-error *ngIf="forms.nom.errors?.required">*</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-6">
+                                                <mat-form-field>
+                                                    <input  matInput placeholder="Prénom" id="prenom" formControlName="prenom" name="prenom" type="text">
+                                                    <mat-error *ngIf="forms.prenom.errors?.required">*</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-6">
-                                          <div class="form-group input-group-sm">
-                                            <label for="dateDeNaissance" class="control-label mb-1 fs-menu">Date de naissance</label>
-                                            <input   required formControlName="dateDeNaissance"  id="dateDeNaissance" name="dateDeNaissance" type="date" class="form-control">
-                                          </div>
+                                           <div>
+                                                <mat-form-field>
+                                                    <input matInput formControlName="dateDeNaissance"  id="dateDeNaissance" name="dateDeNaissance"  [matDatepicker]="myDatepicker" placeholder="Date de naissance">
+                                                    <mat-datepicker #myDatepicker></mat-datepicker>
+                                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                    <mat-error *ngIf="forms.dateDeNaissance.errors?.required">*</mat-error>
+                                                </mat-form-field>
+                                           </div>
                                       </div>
                                       <div class="col-6">
-                                        <div class="form-group input-group-sm">
-                                          <label for="lieuDeNaissance" class="control-label mb-1 fs-menu">Lieu de naissance</label>
-                                          <input  formControlName="lieuDeNaissance" id="lieuDeNaissance" name="lieuDeNaissance" type="text" class="form-control">
-                                        </div>
+                                            <div>
+                                                <mat-form-field>                                          
+                                                    <input matInput placeholder="Lieu de naissance" formControlName="lieuDeNaissance" id="lieuDeNaissance" name="lieuDeNaissance" type="text">
+                                                </mat-form-field>
+                                            </div>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                    <div class="example-container">
+                                            <mat-form-field>
+                                                <input placeholder="Adresse" matInput formControlName="adresse"  id="adresse" name="adresse" type="text">
+                                                <mat-error *ngIf="forms.adresse.errors?.required">*</mat-error>
+                                            </mat-form-field>
                                     </div>
-                                  </div>
-                                  <div class="form-group input-group-sm">
-                                    <label for="adresse" class="control-label mb-1 fs-menu">Adresse</label>
-                                    <input   formControlName="adresse"  id="adresse" name="adresse" type="text" class="form-control">
-                                  </div>
-                                  <div class="form-group input-group-sm">
-                                    <label for="email" class="control-label mb-1 fs-menu">Mail</label>
-                                    <input   formControlName="email"  id="email" name="email" type="text" class="form-control">
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group input-group-sm">
-                                          <label for="tel1" class="control-label mb-1 fs-menu">Tél 1</label>
-                                          <input  required formControlName="numeTelOne"  id="tel1" name="tel1" type="tel" class="form-control">
-                                        </div>
+                                    <div class="example-container">
+                                            <mat-form-field>
+                                                <input placeholder="Mail" matInput formControlName="email"  id="email" name="email" type="text">
+                                                <mat-error>Le format de l'email n'est pas valid</mat-error>
+                                            </mat-form-field>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="form-group input-group-sm">
-                                            <label for="tel2" class="control-label mb-1 fs-menu">Tél 2</label>
-                                            <input  formControlName="numTelTwo"  id="tel2" name="tel2" type="tel" class="form-control">
+                                   <div class="row">
+                                        <div class="col-6">
+                                            <div>
+                                                <mat-form-field>                                          
+                                                    <input  maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 1" formControlName="numeTelOne"  id="tel1" name="tel1" type="tel">
+                                                </mat-form-field>
+                                            </div>
                                         </div>
-                                    </div>
-                                  </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <mat-form-field>                                          
+                                                    <input  maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 2" formControlName="numTelTwo"  id="tel2" name="tel2" type="tel">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                   </div>
                                 <div class="row form-group">
                                         <div class="col col-md-3"><label class=" form-control-label fs-menu">Type client</label></div>
                                         <div class="col col-md-9">
@@ -98,6 +125,7 @@
                                           </div>
                                         </div>
                                 </div>
+                                
                           </div>
                       </div>
       
@@ -121,47 +149,55 @@
                                       </ul>
                                 </div>
                                 <hr>
-                                <div class="form-group input-group-sm">
-                                    <label for="passport" class="control-label mb-1 fs-menu">Passport N°</label>
-                                    <input  formControlName="numeroPasseport" id="passport" name="passport" type="text" class="form-control">
+                                <div class="example-container">
+                                        <mat-form-field>
+                                            <input placeholder="Passport N°" matInput formControlName="numeroPasseport" id="passport" name="passport" type="text">
+                                        </mat-form-field>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="form-group input-group-sm">
-                                          <label for="dateFabricationPas" class="control-label mb-1 fs-menu">Emis le</label>
-                                          <input  formControlName="dateObtentionPassport" id="dateFabricationPas" name="dateFabricationPas" type="date" class="form-control">
+                                        <div>
+                                            <mat-form-field>
+                                                <input matInput formControlName="dateObtentionPassport" id="dateFabricationPas" name="dateFabricationPas" [matDatepicker]="myDatepickerObtention" placeholder="Emis le">
+                                                <mat-datepicker #myDatepickerObtention></mat-datepicker>
+                                                <mat-datepicker-toggle matSuffix [for]="myDatepickerObtention"></mat-datepicker-toggle>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                      <div class="form-group input-group-sm">
-                                        <label for="lieuFabPassport" class="control-label mb-1 fs-menu">À</label>
-                                        <input formControlName="lieuObtentionPasseport" id="lieuFabPassport" name="lieuFabPassport" type="text" class="form-control">
-                                      </div>
+                                            <mat-form-field>
+                                                    <input placeholder="À" matInput formControlName="lieuObtentionPasseport" id="lieuFabPassport" name="lieuFabPassport"  type="text">
+                                            </mat-form-field>
                                   </div>
                                 </div>
                                 <hr>
-                                <div class="form-group input-group-sm">
-                                    <label for="permis" class="control-label mb-1 fs-menu">Permis N°</label>
-                                    <input  required formControlName="numeroDePermis" id="permis" name="permis" type="text" class="form-control">
+                                <div class="example-container">
+                                        <mat-form-field>
+                                            <input placeholder="Permis N°" matInput formControlName="numeroDePermis" id="permis" name="permis" type="text">
+                                        </mat-form-field>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="form-group input-group-sm">
-                                          <label for="dateFabricationPermis" class="control-label mb-1 fs-menu">Emis le</label>
-                                          <input  formControlName="dateObtentionPermis"  id="dateFabricationPermis" name="dateFabricationPermis" type="date" class="form-control">
+                                        <div>
+                                            <mat-form-field>
+                                                <input matInput formControlName="dateObtentionPermis"  id="dateFabricationPermis" name="dateFabricationPermis" [matDatepicker]="myDatepickerObtentionPermis" placeholder="Emis le">
+                                                <mat-datepicker #myDatepickerObtentionPermis></mat-datepicker>
+                                                <mat-datepicker-toggle matSuffix [for]="myDatepickerObtentionPermis"></mat-datepicker-toggle>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                      <div class="form-group input-group-sm">
-                                        <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">À</label>
-                                        <input  formControlName="lieuObtentionPermis"  id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
-                                      </div>
-                                  </div>
+                                            <mat-form-field>
+                                                    <input placeholder="À" matInput formControlName="lieuObtentionPermis"  id="lieuFabricationPermis" name="lieuFabricationPermis"  type="text">
+                                            </mat-form-field>
+                                    </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                        <label for="observation" class="control-label mb-1 fs-menu">Observation sur le client</label>
-                                        <textarea  formControlName="observation"  id="observation" rows="4" name="observation" type="text" class="form-control"></textarea>
+                                <br>
+                                <div class="example-container">
+                                    <mat-form-field appearance="outline">
+                                            <mat-label>Observation sur le client </mat-label>
+                                            <input placeholder="Remarques" matInput formControlName="observation" id="observation" name="observation" type="text">
+                                    </mat-form-field>
                                 </div>
                           </div>
                       </div>
@@ -233,6 +269,8 @@
 </div><!-- /#right-panel -->
   <!-- Right Panel -->
 </div>
+
+
 
 
 

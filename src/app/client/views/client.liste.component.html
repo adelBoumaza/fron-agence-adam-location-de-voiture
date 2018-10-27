@@ -55,7 +55,7 @@
                                                         <th>Dette</th>
                                                         <th>Action</th>
                                                 </tr>
-                                                <tr [ngClass]="{'client-endette': item.sommeDette != 0 && item.sommeDette != null && item.sommeDette != '','client-bloques':item.clientBloque}" *ngFor="let item of clients  | myfilter : filterQuery | paginate: { itemsPerPage: 10, currentPage: firstPage}  ;let i = index">
+                                                <tr style="line-height: 30px;" [ngClass]="{'client-endette': item.sommeDette != 0 && item.sommeDette != null && item.sommeDette != '','client-bloques':item.clientBloque}" *ngFor="let item of clients  | myfilter : filterQuery | paginate: { itemsPerPage: 10, currentPage: firstPage}  ;let i = index">
                                                         <td>{{i+1}}</td>
                                                         <td>{{item.nom | uppercase}}</td>
                                                         <td>{{item.prenom}}</td>

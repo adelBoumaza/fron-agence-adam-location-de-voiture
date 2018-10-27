@@ -1,0 +1,83 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+        <app-aside></app-aside>
+        <!-- Right Panel -->
+    
+    <div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Liste des vehicules</h1>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Information générale </strong>
+                                <span  style="display: block;float: right;padding: 10px;
+                                border-radius: 5px;border: 1px solid lightgray">
+                                    <img [src]="ICON_CARS" style="margin-right: 20px">
+                                    Total vehicules : {{totalCars}} 
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- Credit Card -->
+                                <div id="pay-invoice">
+                                    <div  class="card-body">
+                                        <div class="row">
+                                                <div class="col-4">
+                                                    <div class="form-group  input-group-sm">
+                                                            <label for="voiture" class="control-label mb-1 fs-menu">Rechercher une voiture</label>
+                                                            <input [(ngModel)]="filterQuery" type="text" class="form-control" placeholder="Rechercher par modéle ...">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <table class="table table-hover table-bordered">
+                                                <tr>
+                                                        <th>N°</th>
+                                                        <th>Marque</th>
+                                                        <th>Modèle</th>
+                                                        <th>Immatricule</th>
+                                                        <th>Kilommétrage</th>
+                                                        <th>Annee de Fabrication</th>
+                                                        <th>Couleur</th>
+                                                        <th>Action</th>
+                                                </tr>
+                                                <tr  *ngFor="let item of vehicules  | myfilterVehicule : filterQuery | paginate: { itemsPerPage: 10, currentPage: firstPage}  ;let i = index">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{item.marque | uppercase}}</td>
+                                                        <td>{{item.modele}}</td>
+                                                        <td>{{item.immatricule}}</td>
+                                                        <td>{{item.kilommetrage}}</td>
+                                                        <td>{{item.anneeFabrication}}</td>
+                                                        <td [style.background-color]="item.couleur"></td>
+                                                        <td style="background: white!important">
+                                                                <button (click)="findOneVehicule(item)"  style="background: #42c5e1!important;color: white" class="btn btn-block btn-sm">Editer</button>
+                                                        </td>
+                                                        
+                                                </tr>
+                                        </table>
+                                        <pagination-controls previousLabel="Précédent"
+                                        nextLabel="Suivant" class="my-pagination" (pageChange)="firstPage = $event"></pagination-controls>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .card -->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+</div><!-- /#right-panel -->
+
+
+
+
+

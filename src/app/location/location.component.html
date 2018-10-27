@@ -15,6 +15,7 @@
             </div>
       <div class="content mt-3">
         <div class="animated fadeIn">
+            <form #saveLocationForm="ngForm">
             <div class="row">
               <div class="col-lg-6">
                 <div class="card">
@@ -31,134 +32,114 @@
                                       </ul>
                                   </div>
                                   <hr>
-                                  <div class="form-group input-group-sm">
-                                        <div class="input-group-sm">
-                                                <label for="client" class="control-label mb-1 fs-menu">Client</label>
-                                                <select name="client" id="client" class="form-control">
-                                                        <option value="0">Please select</option>
-                                                        <option value="1">Boumaza Adel</option>
-                                                </select>
+                                  <div class="row form-group input-group-sm">
+                                        <div class="input-group-sm col-6">
+                                                <label for="nom" class="control-label mb-1 fs-menu">Nom Client</label>
+                                                <input  required  id="nom" [(ngModel)]="location.nomClient" name="nom" type="text" class="form-control">
+                                        </div>
+                                        <div class="input-group-sm col-6">
+                                                <label for="prenomClient" class="control-label mb-1 fs-menu">prénom Client</label>
+                                                <input  required id="prenomClient" [(ngModel)]="location.prenomClient" name="prenom" type="text" class="form-control">
                                         </div>
                                   </div>
                                   <div class="row form-group input-group-sm">
                                         <div class="input-group-sm col-6">
-                                                <label for="voiture" class="control-label mb-1 fs-menu">Marque</label>
-                                                <select name="Caisse" id="Caisse" class="form-control">
-                                                        <option value="0">Please select</option>
-                                                        <option value="1">Renault</option>
-                                                </select>
+                                                <label for="marque" class="control-label mb-1 fs-menu">Marque</label>
+                                                <input   [disabled]="true" id="marque" [(ngModel)]="locationObject?.voitureDto.marque" name="marque" type="text" class="form-control">
                                         </div>
                                         <div class="input-group-sm col-6">
-                                                <label for="voiture" class="control-label mb-1 fs-menu">Voiture</label>
-                                                <select name="Caisse" id="Caisse" class="form-control">
-                                                        <option value="0">Please select</option>
-                                                        <option value="1">Clio</option>
-                                                </select>
+                                                <label for="modele" class="control-label mb-1 fs-menu">Modèle</label>
+                                                <input  [disabled]="true" id="modele" [(ngModel)]="locationObject?.voitureDto.modele" name="modele" type="text" class="form-control">
                                         </div>
                                   </div>
-                                  <div class="row">
-                                      <div class="col-12" style="padding: 0px!important">
-                                          <div class="form-group input-group-sm col-8">
-                                            <label for="dateDepart" class="control-label mb-1 fs-menu">Date de départ</label>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                  <input class="form-control" placeholder="yyyy-mm-dd"
-                                                         name="dateD" [(ngModel)]="dateDeDepart" ngbDatepicker #dateD="ngbDatepicker">
-                                                  <div class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" (click)="dateD.toggle()" type="button">
-                                                        <li class="list-inline-item" style="cursor: pointer;">
-                                                            <i class="fa fa-calendar-times-o fa-2x"></i>
-                                                        </li>
-                                                    </button>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="form-group input-group-sm col-4">
-                                            <label for="HdateDepart" class="control-label mb-1 fs-menu">Heure de départ</label>
-                                            <ngb-timepicker [(ngModel)]="heureDepart" class="form-control"></ngb-timepicker>
-                                         </div>
-                                      </div>
-                                      <div class="col-12" style="padding: 0px!important">
-                                        <div class="form-group input-group-sm col-8">
-                                            <label for="dateDeRetour" class="control-label mb-1 fs-menu">Date de retour</label>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                  <input class="form-control" placeholder="yyyy-mm-dd"
-                                                         name="dr" [(ngModel)]="dateDeRetour" ngbDatepicker #dateR="ngbDatepicker">
-                                                  <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary" (click)="dateR.toggle()" type="button">
-                                                            <li class="list-inline-item" style="cursor: pointer;">
-                                                                <i class="fa fa-calendar-times-o fa-2x"></i>
-                                                            </li>
-                                                        </button>
-                                                  </div>
-                                                </div>
-                                              </div>
+                                  <div class="row form-group input-group-sm">
+                                        <div class="input-group-sm col-3">
+                                                <label for="depart" class="control-label mb-1 fs-menu">Départ</label>
+                                                <input   [disabled]="true" id="depart" [(ngModel)]="locationObject?.reservationDto.dateDeDepart" name="depart" type="text" class="form-control">
                                         </div>
-                                        <div class="form-group input-group-sm col-4">
-                                                <label for="HdateRetour" class="control-label mb-1 fs-menu">Heure de retour</label>
-                                                <ngb-timepicker  [(ngModel)]="heureRetour" class="form-control"></ngb-timepicker>
+                                        <div class="input-group-sm col-3">
+                                                <label for="HeureR" class="control-label mb-1 fs-menu">Heure</label>
+                                                <input required  id="HeureR" [(ngModel)]="location.heureDepart" name="HeureR" type="time" class="form-control">
                                         </div>
-                                    </div>
+                                        <div class="input-group-sm col-3">
+                                                <label for="Retour" class="control-label mb-1 fs-menu">Retour</label>
+                                                <input   [disabled]="true" id="Retour" [(ngModel)]="locationObject?.reservationDto.dateDeRetour" name="Retour" type="text" class="form-control">
+                                        </div>
+                                        <div class="input-group-sm col-3">
+                                                <label for="HeureR" class="control-label mb-1 fs-menu">Heure</label>
+                                                <input required  id="HeureR" [(ngModel)]="location.heureRetour" name="HeureR" type="time" class="form-control">
+                                        </div>
                                   </div>
                                   <div class="row">
                                         <div class="col-4">
                                             <div class="form-group input-group-sm">
                                                 <label for="nbrj" class="control-label mb-1 fs-menu">Nombre de jours</label>
-                                                <input id="nbrj" name="nbrj" type="text" class="form-control">
+                                                <input [disabled]="true" id="nbrj" name="nbrj" type="text" [(ngModel)]="location.nombreDeJours" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-4">
                                           <div class="form-group input-group-sm">
                                                 <label for="prixU" class="control-label mb-1 fs-menu">Prix unitaire</label>
-                                                <input id="prixu" name="prixU" type="text" class="form-control">
+                                                <input (blur)="onChangePrixUnitaire()" id="prixu" name="prixU" [(ngModel)]="location.prixUnitaire"  type="text" class="form-control">
                                           </div>
-                                      </div>
-                                      <div class="col-4">
+                                       </div>
+                                       <div class="col-4">
                                             <div class="form-group input-group-sm">
                                                   <label for="remise" class="control-label mb-1 fs-menu">Remise</label>
-                                                  <input id="remise" name="remise" type="text" class="form-control">
+                                                  <input (blur)="onChangeRemise()" [(ngModel)]="location.remise" id="remise" name="remise" type="number" class="form-control">
                                             </div>
-                                      </div>
+                                        </div>
                                   </div>
                                   <div class="row">
                                         <div class="col-6">
                                             <div class="form-group input-group-sm">
                                                 <label for="totalTTC" class="control-label mb-1 fs-menu">Total TTC</label>
-                                                <input id="totalTTC" name="totalTTC" type="text" class="form-control">
+                                                <input [(ngModel)]="location.totalTTC" [disabled]="true" id="totalTTC" name="totalTTC" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                           <div class="form-group input-group-sm">
                                                 <label for="totalHT" class="control-label mb-1 fs-menu">Total HT</label>
-                                                <input id="totalHT" name="totalHT" type="text" class="form-control">
+                                                <input [(ngModel)]="location.totalHT" [disabled]="true" id="totalHT" name="totalHT" type="text" class="form-control">
                                           </div>
+                                        </div>
+                                  </div>
+                                  <div class="row">
+                                        <div class="col-6">
+                                                <div class="form-group input-group-sm">
+                                                      <label for="versement" class="control-label mb-1 fs-menu">Versement</label>
+                                                      <input (blur)="onChangeVersement()" [(ngModel)]="location.versement" id="versement" name="versement" type="number" class="form-control">
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                                <div class="form-group input-group-sm">
+                                                    <label for="resteApaye" class="control-label mb-1 fs-menu">Reste à payé</label>
+                                                    <input [ngClass]="{'statutNonPaye':location.resteApaye > 0,'statutPaye':location.resteApaye == 0 }" [(ngModel)]="location.resteApaye" [disabled]="true" id="resteApaye" name="resteApaye" type="text" class="form-control">
+                                                </div>
                                         </div>
                                   </div>
                                   <hr>
                                   <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <div class="form-group input-group-sm">
                                                 <label for="Caution" class="control-label mb-1 fs-menu">Caution</label>
-                                                <select name="Caution" id="Caution" class="form-control">
-                                                        <option value="0">Espèce</option>
-                                                        <option value="1">Chéque</option>
+                                                <select [(ngModel)]="location.caution" name="Caution" id="Caution" class="form-control">
+                                                        <option value="Espèce">Espèce</option>
+                                                        <option value="Chéque">Chéque</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-3">
                                           <div class="form-group input-group-sm">
                                                 <label for="mnt" class="control-label mb-1 fs-menu">Montant</label>
-                                                <input id="mnt" name="mnt" type="text" class="form-control">
+                                                <input [(ngModel)]="location.montant" id="mnt" name="mnt" type="number" class="form-control">
                                           </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-6">
                                                 <div class="form-group input-group-sm">
-                                                    <label for="Caution" class="control-label mb-1 fs-menu">Statut</label>
-                                                    <select name="Caution" id="Caution" class="form-control">
-                                                            <option value="0">Payé</option>
-                                                            <option value="1">Non Payé</option>
+                                                    <label for="Statut" class="control-label mb-1 fs-menu">Statut</label>
+                                                    <select [disabled]="true" [(ngModel)]="location.statut" name="Statut" id="Statut" class="form-control">
+                                                            <option *ngFor="let item of ListeStatut" [ngValue]="item">{{item}}</option>
                                                     </select>
                                                 </div>
                                         </div>
@@ -169,19 +150,17 @@
                             <div class="card">
                                   <div id="pay-invoice">
                                       <div class="card-body">
-                                          <form action="" method="post" novalidate="novalidate">
+                                             <span *ngIf="errors" style="color: red;display: block;font-size: 12px;text-align: center;">{{messageError}}</span>
                                               <div>
-                                                  <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                  <button [disabled]="!saveLocationForm.valid" (click)="open(content)" style="color: white;" id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                                       <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                       <span id="payment-button-amount">Enregistrer</span>
                                                       <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                   </button>
                                               </div>
-                                          </form>
                                       </div>
                                   </div>
-                        </div> <!-- .card -->
-                  
+                            </div> <!-- .card -->
                         </div><!--/.col-->
                     </div>
                 </div> <!-- .card -->
@@ -196,8 +175,8 @@
                     <div class="card-body">
                       <!-- Credit Card -->
                       <div id="pay-invoice">
-                          <div class="card-body">
-                                <div class="form-group text-center">
+                          <div>
+                                <div class="form-group text-center" style="margin-bottom: 35px!important">
                                       <ul class="list-inline">
                                             <li class="list-inline-item"><i class="fa fa-address-card fa-4x"></i></li>
                                       </ul>
@@ -207,13 +186,13 @@
                                     <div class="col-6">
                                         <div class="form-group input-group-sm">
                                             <label for="passport" class="control-label mb-1 fs-menu">Passport N°</label>
-                                            <input id="passport" name="passport" type="text" class="form-control">
+                                            <input required [(ngModel)]="location.numeroPasseport" id="passport" name="passport" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                       <div class="form-group input-group-sm">
                                             <label for="permis" class="control-label mb-1 fs-menu">Permis N°</label>
-                                            <input id="permis" name="permis" type="text" class="form-control">
+                                            <input required [(ngModel)]="location.numeroPermis" id="permis" name="permis" type="text" class="form-control">
                                       </div>
                                   </div>
                                 </div>
@@ -221,13 +200,13 @@
                                     <div class="col-6">
                                         <div class="form-group input-group-sm">
                                             <label for="adresse" class="control-label mb-1 fs-menu">Adresse</label>
-                                            <input id="adresse" name="adresse" type="text" class="form-control">
+                                            <input required [(ngModel)]="location.adresse" id="adresse" name="adresse" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group input-group-sm">
                                             <label for="tel1" class="control-label mb-1 fs-menu">Tél 1</label>
-                                            <input id="tel1" name="tel1" type="tel" class="form-control">
+                                            <input required [(ngModel)]="location.tel" id="tel1" name="tel1" type="tel" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -240,9 +219,9 @@
                                 <div class="row">
                                         <div class="col-12">
                                                 <div class="form-group input-group-sm">
-                                                        <label class="control-label mb-1 fs-menu">Coulour</label>
-                                                        <div  style="border: 1px white;height: 30px;background: red"></div>
-                                                        <input  name="Immatricule" type="hidden" class="form-control">
+                                                        <label class="control-label mb-1 fs-menu">Couleur</label>
+                                                        <div  style="border: 1px white;height: 30px;" [style.background-color]="locationObject?.voitureDto.couleur"></div>
+                                                        <input  name="couleur" type="hidden" class="form-control">
                                                 </div>
                                         </div>
                                 </div>
@@ -251,48 +230,56 @@
                                         <div class="col-6">
                                             <div class="form-group input-group-sm">
                                                     <label for="Immatricule" class="control-label mb-1 fs-menu">Immatricule</label>
-                                                    <input id="Immatricule" name="Immatricule" type="text" class="form-control">
+                                                    <input [(ngModel)]="location.immatricule" id="Immatricule" name="Immatricule" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group input-group-sm">
                                                 <label for="expirationAssurance" class="control-label mb-1 fs-menu">Date expiration assurance</label>
-                                                <input id="expirationAssurance" name="expirationAssurance" type="date" class="form-control">
+                                                <input [disabled]="true"  [(ngModel)]="dateExpirationAssurance" id="expirationAssurance" name="expirationAssurance" type="text" class="form-control">
                                             </div>
                                         </div>
                                 </div>
                                 <div class="row">
                                         <div class="col-6">
                                             <div class="form-group input-group-sm">
-                                                    <label for="lieuFabricationPermis" class="control-label mb-1 fs-menu">Kilommétrage actuel</label>
-                                                    <input id="lieuFabricationPermis" name="lieuFabricationPermis" type="text" class="form-control">
+                                                    <label for="kmActuel" class="control-label mb-1 fs-menu">Kilommétrage actuel</label>
+                                                    <input required [(ngModel)]="location.kmActuel" id="kmActuel" name="kmActuel" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group input-group-sm">
-                                                <label for="coulour" class="control-label mb-1 fs-menu">Carburant actuel</label>
-                                                <input id="coulour" name="coulour" type="text" class="form-control">
+                                                <label for="carburant" class="control-label mb-1 fs-menu">Carburant actuel</label>
+                                                <input required [(ngModel)]="location.carburantActuel" id="carburant" name="carburant" type="text" class="form-control">
                                             </div>
                                         </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-12">
-                                                <div class="col col-md-3" style="padding: 0px!important"><label class=" form-control-label fs-menu">Energie</label></div>
-                                                <div class="col col-md-9">
-                                                  <div class="form-check-inline form-check">
-                                                    <label for="inline-radio1" class="form-check-label fs-menu" style="padding-right: 30px;font-weight: bold">
-                                                      <input type="radio" id="inline-radio1" name="inline-radios" value="option1" class="form-check-input">Essance
-                                                    </label>
-                                                    <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
-                                                      <input type="radio" id="inline-radio2" name="inline-radios" value="option2" class="form-check-input">Diesel
-                                                    </label>
-                                                    <label style="padding-right: 30px;font-weight: bold" for="inline-radio2" class="form-check-label fs-menu">
-                                                            <input type="radio" id="inline-radio2" name="inline-radios" value="option3" class="form-check-input">GPL
-                                                          </label>
-                                                  </div>
+                                                <div class="form-group input-group-sm">
+                                                        <label for="energie" class="control-label mb-1 fs-menu">Energie</label>
+                                                        <input [disabled]="true" [(ngModel)]="locationObject?.voitureDto.energie" id="energie" name="energie" type="text" class="form-control">
                                                 </div>
                                         </div>
                                 </div>
+                                <div class="card">
+                                        <div id="pay-invoice" style="padding-bottom: 23px;">
+                                                <div class="card-body" >
+                                                        <div class="col-6">
+                                                            <button style="color: white;" (click)="retourToReservation()" type="button" class="btn btn-lg btn-danger btn-block">
+                                                                  <i class="fa fa-angle-double-right fa-lg"></i>&nbsp;
+                                                                  <span id="payment-button-amount">Retour</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                                <button style="color: white;" (click)="ngOnInit()" type="button" class="btn btn-lg btn-warning btn-block">
+                                                                      <i class="fa fa-automobile fa-lg"></i>&nbsp;
+                                                                      <span id="payment-button-amount">Initialisation</span>
+                                                                </button>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div> <!-- .card -->
                           </div>
                       </div>
                     </div>
@@ -301,6 +288,87 @@
               </div><!--/.col-->
               
             </div>
+
+            <!--modal-->
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Information - Location</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="border: 1px dashed;margin: 20px;">
+                        <div style="margin: auto;text-align: center;">
+                            <p class="font-ticket">*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</p>
+                            <p class="font-ticket">Boumaza Rafik</p>
+                            <p class="font-ticket" >rue du 20 Août 1955</p>
+                            <p class="font-ticket">Skikda 21000</p>
+                            <p class="font-ticket" >tél : 0773136219</p>
+                            <p class="font-ticket">*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</p>
+                        </div>
+                        <div style="text-align: left;">
+                            <p class="font-ticket" style="display: inline-block;">Agence : agence Adam</p> <span style="float: right;font-family: ticket">12-01-2018 12H:30</span>
+                            <p class="font-ticket" >Ticket : 124JHO</p>
+                            <p class="font-ticket">Client : {{location.nomClient}} {{location.prenomClient}}</p>
+                        </div>
+                        <p class="font-ticket" style="font-size: 12px;margin: auto;text-align: center;">
+                            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+                        </p>
+                        <div style="text-align: left;">
+                                <p class="font-ticket" style="display: inline-block;">Date départ : {{locationObject.reservationDto.dateDeDepart}}</p> 
+                                <span style="float: right;font-family: ticket">{{location.heureDepart}}</span>   
+                        </div>
+                        <div style="text-align: left;">
+                                <p class="font-ticket" style="display: inline-block;">Date Retour : {{locationObject.reservationDto.dateDeRetour}}</p> 
+                                <span style="float: right;font-family: ticket">{{location.heureRetour}}</span>   
+                        </div>
+                        <div style="text-align: left;">
+                                <p class="font-ticket" style="display: inline-block;">PRIX UNITAIRE : {{location.prixUnitaire}} &#10005; {{location.nombreDeJours}}</p> 
+                                <span style="float: right;font-family: ticket">{{location.totalTTC}}</span>   
+                        </div>
+                        <p class="font-ticket" style="font-size: 12px;margin: auto;text-align: center;">
+                                *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+                        </p>
+                        <div style="text-align: left;">
+                                <p class="font-ticket" style="display: inline-block;">TOTAL TTC : {{location.totalTTC}}</p> 
+                                <span style="float: right;font-family: ticket">TOTAL HT : {{location.totalHT}}</span>   
+                        </div>
+                        <div style="text-align: left;">
+                                <p class="font-ticket" style="display: inline-block;">VERSEMENT : {{location.versement}}</p> 
+                                <span style="float: right;font-family: ticket">Reste à Payer : {{location.resteApaye}}</span>   
+                        </div>
+                        <div style="text-align: left;">
+                                <p class="font-ticket" style="display: inline-block;">
+                                    Statut : {{location.statut}}
+                                    <span *ngIf="location.statut == ListeStatut[0]" style="color: green">&#10004;</span>
+                                    <span *ngIf="location.statut == ListeStatut[1]" style="color: orange">&#10006;</span>
+                                    <span *ngIf="location.statut == ListeStatut[2]" style="color: red">&#10006;</span>
+                                </p> 
+                        </div>
+                        <p class="font-ticket" style="font-size: 12px;margin: auto;text-align: center;">
+                                *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+                        </p>
+                        <div class="card" style="padding-bottom: 0px;">
+                                <div id="pay-invoice" style="padding-bottom: 23px;">
+                                        <div class="card-body" >
+                                                <div class="col-6">
+                                                    <button style="color: white;" (click)="saveLocation();d('Cross click')" type="button" class="btn btn-lg btn-success btn-block">
+                                                          <i class="fa fa-check  fa-lg"></i>&nbsp;
+                                                          <span id="payment-button-amount">OUI</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                        <button style="color: white;" (click)="ngOnInit();d('Cross click')" type="button" class="btn btn-lg btn-warning btn-block">
+                                                              <i class="fa fa-crosshairs fa-lg"></i>&nbsp;
+                                                              <span id="payment-button-amount">NON</span>
+                                                        </button>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div> <!-- .card -->
+                </div>
+              </ng-template>
+            </form>
         </div>
     </div>
 </div><!-- /#right-panel -->

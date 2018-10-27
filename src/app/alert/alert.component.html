@@ -1,0 +1,51 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header" style="background: #ffc200!important">
+            <strong class="card-title">Alerts <img [src]="ICON_ALERT"></strong>
+        </div>
+        <div class="card-body">
+                <div class="form-group text-center">
+                            <img [src]="ICON_CARS">  
+                </div>
+        </div>
+        <div class="col-12" style="color: black;">
+          <div class="card pulse-btn">
+              <button class="btn btn-warning" type="button">
+                  <label  class="control-label mb-1 fs-menu">Le Véhicule : Logan 123-989-80</label>
+              </button>
+          </div>
+        </div>
+        <br>
+        <div class="col-12" style="color: black;text-align: left">
+          <div class="card" style="padding: 5px">
+              <label  class="control-label mb-1 fs-menu" >1 - l'assurance termine : le 19/07/2018</label>
+              <label  class="control-label mb-1 fs-menu" >2 - la vidange termine  : le 16/07/2018</label>
+          </div>
+        </div>
+        <br>
+        <form class="form-inline" style="margin: auto">
+          <div class="form-group mb-2">
+            <button (click)="repeterAlert();" style="margin-bottom: 0px!important" type="submit" class="btn btn-danger mb-2 btn-sm">Répéter</button>
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <select [(ngModel)]="timer" class="form-control selectpicker btn btn-mini" name="ftr" id="ftr">
+              <option  value="5">5 minutes</option>
+              <option  value="10">10 minutes</option>
+              <option  value="15">15 minutes</option>
+             </select> 
+          </div>
+          <div class="form-group mb-2">
+            <button (click)="faireDisparaitre();" style="margin-bottom: 0px!important" type="button" class="btn btn-danger mb-2 btn-sm">Faire disparaitre</button>
+          </div>
+          
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+ 

@@ -1,0 +1,93 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+    <app-aside></app-aside>
+    <!-- Right Panel -->
+
+<div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Liste des clients</h1>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Information générale </strong>
+                            <span  style="display: block;float: right;padding: 10px;
+                            border-radius: 5px;border: 1px solid lightgray">
+                                <img [src]="ICON_MONEY" style="margin-right: 20px">
+                                Total Dettes : {{totalDette}} DA
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <!-- Credit Card -->
+                            <div id="pay-invoice">
+                                <div class="card-body">
+                                    <div class="form-group text-center">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fa fa-address-card fa-4x"></i></li>
+                                        </ul>
+                                    </div>
+                                    <hr> 
+                                    <div class="row">
+                                            <div class="col-lg-6">
+                                              <div class="input-group">
+                                                <input [(ngModel)]="filterQuery" type="text" class="form-control" placeholder="Rechercher par nom ...">
+                                              </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                    </div><!-- /.row -->
+                                    <br>
+                                    <table class="table table-hover table-bordered">
+                                        <tr>
+                                                <th>N°</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>TotalTTC</th>
+                                                <th>Versement</th>
+                                                <th>Reste à payer</th>
+                                                <th>Date départ</th>
+                                                <th>Date retour</th>
+                                                <th>nombreDeJours</th>
+                                                <th>Marque</th>
+                                                <th>Modèle</th>
+                                        </tr>
+                                        <!-- | myfilter : filterQuery-->
+                                        <tr  *ngFor="let item of listeDette | myfilter : filterQuery | paginate: { itemsPerPage: 10, currentPage: firstPage};let i = index">
+                                                <td>{{i+1}}</td>
+                                                <td>{{item.nom}}</td>
+                                                <td>{{item.prenom}}</td>
+                                                <td>{{item.totalTTC}}</td>
+                                                <td>{{item.versement}}</td>
+                                                <td>{{item.resteApayer}}</td>
+                                                <td>{{item.dateDeDepart}}</td>
+                                                <td>{{item.dateDeRetour}}</td>
+                                                <td>{{item.nombreDeJours}}</td>
+                                                <td>{{item.marque}}</td>
+                                                <td>{{item.modele}}</td>                                        
+                                        </tr>
+                                    </table>
+                                    <pagination-controls previousLabel="Précédent"
+                                    nextLabel="Suivant" class="my-pagination" (pageChange)="firstPage = $event"></pagination-controls>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .card -->
+            </div><!--/.col-->
+        </div>
+    </div>
+</div>
+</div><!-- /#right-panel -->
+
+
+
+
+

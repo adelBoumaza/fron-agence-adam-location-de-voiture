@@ -1,18 +1,20 @@
-import { PipeTransform, Pipe } from "@angular/core";
+import { PipeTransform, Pipe } from '@angular/core';
 
-@Pipe ({ 
+@Pipe ({
   name : 'myfilter' ,
   pure : false
 })
-export class FilterPipe implements PipeTransform{
-    
-
+export class FilterPipe implements PipeTransform {
   transform(items: any[], filterQuery: string): any[] {
-    if(!items) return [];
-    if(!filterQuery) return items;
+    if (!items) return [];
+    if (!filterQuery) return items;
     filterQuery = filterQuery.toLowerCase();
     return items.filter( it => {
-      return it.nom.toLowerCase().includes(filterQuery);
+      if (it.nom !== undefined) {
+        return it.nom.toLowerCase().includes(filterQuery);
+      } else if (it.nomClient !== undefined) {
+        return it.nomClient.toLowerCase().includes(filterQuery);
+      }
     });
    }
 }

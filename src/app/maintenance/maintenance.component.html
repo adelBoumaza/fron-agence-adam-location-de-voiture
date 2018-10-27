@@ -14,6 +14,18 @@
             </div>
         </div>
   <div class="content mt-3">
+        <div  *ngIf="confirmChargement" class="container" style="text-align: center;">
+                <img  [src]="chargement">
+        </div>
+        <div  *ngIf="existError" id="display-error">
+                <img [src]="ICON_ERROR" alt="Error" /> 
+                {{success}}
+        </div>
+        <div *ngIf="existSuccess" id="display-success">
+                <img [src]="ICON_SUCCESS" alt="Success" />
+                {{success}}
+        </div>
+        <br>
     <div class="animated fadeIn">
         <div class="row">
           <div class="col-lg-12">
@@ -30,11 +42,13 @@
                                       <img  [src]="ICON_MAINTENANCE_PATH"  style="margin: auto">
                                   </ul>
                             </div>
-                            <hr>
-                            <div class="row ">
+                            <hr *ngIf="btnSave">
+                            <form #saveMaintenanceForm="ngForm" (ngSubmit)="submitForm()">
+                            <div class="row " *ngIf="btnSave">
                                 <div class="col-4 input-group-sm">
                                         <label for="marque" class="control-label mb-1 fs-menu">Marque</label>
-                                        <select class="form-control selectpicker" [(ngModel)]="marqueSelected" name="ftr" id="ftr">
+                                        <select required (change)="loadVoitureByMarque(false)"  class="form-control selectpicker" [(ngModel)]="marqueSelected" name="ftr" id="ftr">
+                                                <option [ngValue]="null" >Select one</option>
                                                 <option  *ngFor="let f of tabMarques" [ngValue]="f">
                                                             {{f}}  
                                                 </option>
@@ -42,93 +56,149 @@
                                 </div>
                                 <div class="col-4 input-group-sm">
                                     <label for="voiture" class="control-label mb-1 fs-menu">Voiture</label>
-                                    <select name="voiture" id="voiture" class="form-control">
-                                                <option value="0">Please select</option>
-                                                <option value="1">Clio</option>
-                                                <option value="2">Logane</option>
+                                    <select required (change)="findLastAssuranceByVoiture()" [(ngModel)]="maintenance.idVoiture" name="voiture" id="voiture" class="form-control">
+                                                <option [ngValue]="undefined">Please select</option>
+                                                <option  *ngFor="let f of listeVoitureForm" [ngValue]="f[0]">
+                                                        {{f[1]}}  
+                                                </option>
                                     </select>
                                 </div>
                               <div class="col-4">
                                   <div class="form-group input-group-sm">
-                                            <label for="fh" class="control-label mb-1 fs-menu">Assurance</label>
-                                            <p>Termine le : 11/05/2018</p>
+                                            <label *ngIf="(exception != '' && exception != undefined) || (dateExpirationAssurance != '' && dateExpirationAssurance != undefined)" for="fh" class="control-label mb-1 fs-menu">Assurance</label>
+                                            <div *ngIf="(exception != '' && exception != undefined) " class="card pulse-btn" style="padding: 0px!important;">
+                                                    <button class="btn btn-warning" type="button">
+                                                            <p style="color:red;font-size: 10px!important;letter-spacing: 0px!important">
+                                                                    <img [src]="ICON_ERROR" alt="Error" />{{exception}}
+                                                            </p>
+                                                    </button>
+                                            </div>
+                                            <p *ngIf="dateExpirationAssurance != '' && dateExpirationAssurance != undefined">Termine le : {{dateExpirationAssurance | date : 'dd/MM/yyyy'}}</p>
                                   </div>
                               </div>
                             </div>
-                            <hr>
-                            <div class="row ">
-                                <div class="col-4 input-group-sm">
+                            <hr *ngIf="maintenance.idVoiture != undefined"> 
+                            <div *ngIf="maintenance.idVoiture != undefined" class="row ">
+                                <div class="col-3 input-group-sm">
                                     <label for="tr" class="control-label mb-1 fs-menu">Type de révision</label>
-                                    <select class="form-control"  name="tr" id="tr">
+                                    <select required [(ngModel)] = "maintenance.typeRevision" class="form-control"  name="tr" id="tr">
                                         <option *ngFor="let f of maintenanceArray" [ngValue]="f" >{{f}}</option>
                                       </select>  
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                         <div class="form-group input-group-sm">
-                                                  <label for="km" class="control-label mb-1 fs-menu">KM</label>
-                                                  <input id="km" name="km" type="text" class="form-control">
+                                                  <label for="km" class="control-label mb-1 fs-menu">KM de revision</label>
+                                                  <input myNumberOnly required [(ngModel)] = "maintenance.kmRevision" id="km" name="km" type="text" class="form-control">
+                                                  <label style="color: red;font-size: 12px;"  *ngIf="kmActuel != undefined && btnSave" >Km Actuel {{kmActuel}}</label>
                                         </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                   <div class="form-group input-group-sm">
-                                            <label for="pi" class="control-label mb-1 fs-menu">Prix de l'intervention</label>
-                                            <input id="pi" name="pi" type="text" class="form-control">
-                                  </div>
+                                            <label for="prixIntervention" class="control-label mb-1 fs-menu">Prix de l'intervention</label>
+                                            <input myNumberOnly required [(ngModel)] = "maintenance.prixIntervention" id="prixIntervention" name="prixIntervention"  class="form-control">
+                                        </div>
+                                </div>
+                                <div class="col-3">
+                                        <div class="form-group input-group-sm">
+                                                  <label for="pi" class="control-label mb-1 fs-menu">Date de l'intervention</label>
+                                                  <input required [(ngModel)] = "maintenance.dateIntervention" id="pi" name="pi" type="date" class="form-control">
+                                                  <label *ngIf="validatorDate != undefined" style="color: red;" class="control-label mb-1 fs-menu">{{validatorDate}}</label>
+                                        </div>
                                 </div>
                           </div>
                         <hr>
-                        <div class="card-body">
-                            <button style="margin-right: 20px" type="button" class="btn btn-success"><i class="fa fa-magic"></i>&nbsp; Enregistrer</button>
-                            <button type="button" class="btn btn-warning"><i class="fa fa-map-marker"></i>&nbsp; Annuler</button>
+                        <div class="row">
+                                <div class="col-lg-12">
+                                        <div class="card">
+                                          <div id="pay-invoice">
+                                              <div class="card-body">
+                                                    <div class="col-lg-8" style="margin-bottom: 20px">
+                                                            <button  [disabled]="!saveMaintenanceForm.valid" id="payment-button" type="submit" class="btn btn-outline-info btn-block">
+                                                                <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                                <span id="payment-button-amount">
+                                                                    <i *ngIf="btnSave">Enregistrer</i>
+                                                                    <i *ngIf="!btnSave">Modifier</i>
+                                                                </span>
+                                                            </button>
+                                                    </div>
+                                                    <div  class="col-lg-4">
+                                                            <button   class="btn btn-outline-danger btn-block" type="button" (click)="reset();">
+                                                                  <span id="payment-button-amountR">
+                                                                      <i>Annuler</i>
+                                                                  </span>
+                                                            </button>
+                                                    </div>
+                                              </div>
+                                          </div>
+                                        </div> <!-- .card -->
+                                </div>
                         </div>
+                        </form>
                         <hr>
                           <h5 style="text-align: center">Liste de la révision du parc</h5>
                         <br> 
                         <div class="row">
-                              <div class="col-4 input-group-sm">
+                                <div class="col-4 input-group-sm">
                                   <label for="ftr" class="control-label mb-1 fs-menu">Filtrer par type de révision</label>
-                                  <select class="form-control"  name="ftr" id="ftr">
+                                  <select  (change)="onChange()" [(ngModel)] = "maintenanceSearchListe.typeRevision" class="form-control"  name="ftr" id="ftr">
+                                      <option [ngValue]="null" >Select one</option>
                                       <option *ngFor="let f of maintenanceArray" [ngValue]="f" >{{f}}</option>
                                     </select>  
-                              </div>
+                                </div>
+                                <div class="col-4 input-group-sm">
+                                    <label for="marqueSearch" class="control-label mb-1 fs-menu">Filtrer par marque de voiture</label>
+  
+                                    <select (change)="loadVoitureByMarque(true)" class="form-control selectpicker" [(ngModel)]="maintenanceSearchListe.marque" name="marqueSearch" id="marqueSearch">
+                                            
+                                            <option [ngValue]="null" >Select one</option>
+                                            <option  *ngFor="let f of tabMarques" [ngValue]="f">
+                                                        {{f}}  
+                                            </option>
+                                    </select> 
+                                </div>
+                                <div class="col-4 input-group-sm">
+                                        <label for="modeleSearch" class="control-label mb-1 fs-menu">Filtrer par Modèle de voiture</label>
+                                        <select (change)="onChange()" class="form-control selectpicker" [(ngModel)]="maintenanceSearchListe.idVoiture" name="modeleSearch" id="modeleSearch">
+                                                <option [ngValue]="null" >Select one</option>
+                                                <option  *ngFor="let f of listeVoiture" [ngValue]="f[0]">
+                                                            {{f[1]}}  
+                                                </option>
+                                        </select> 
+                                </div>   
                         </div>
                         <br>
-                            <table class="table table-bordered table-hover" style="margin: auto">
+                            <table class="table table-bordered" style="margin: auto">
                                 <thead>
                                   <tr>
-                                    <th>Date</th>
-                                    <th>KM</th>
-                                    <th>Révision</th>
+                                    <th>N°</th>
+                                    <th>Voiture</th>
+                                    <th>Date de révision</th>
+                                    <th>KM actuel</th>
+                                    <th>KM de Révision</th>
+                                    <th>Type de révision</th>
+                                    <th>Reste à rouler</th>
                                     <th>Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>11/04/2018</td>
-                                    <td>56788</td>
-                                    <td>Filtre à huile</td>
-                                    <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                      <td>11/04/2018</td>
-                                      <td>56788</td>
-                                      <td>Filtre à huile</td>
-                                      <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                        <td>11/04/2018</td>
-                                        <td>56788</td>
-                                        <td>Filtre à huile</td>
-                                        <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
-                                  <tr>
-                                        <td>11/04/2018</td>
-                                        <td>56788</td>
-                                        <td>Filtre à huile</td>
-                                        <td style="text-align: center"><button type="button" class="btn btn-outline-success btn-sm">Modifier</button></td>
-                                  </tr>
+                                    <tr [ngClass]="{'restArouler': item.restArouler < 0}" *ngFor="let item of maintenances  | paginate: { itemsPerPage: 10, currentPage: firstPage}  ;let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.marque | uppercase}} - {{item.modele}}</td>
+                                        <td>{{item.dateIntervention | date : 'dd/MM/yyyy'}}</td>
+                                        <td>{{item.kmActuelle}} KM</td>
+                                        <td>{{item.kmRevision}} KM</td>
+                                        <td>{{item.typeRevision}}</td>
+                                        <td *ngIf="item.restArouler != undefined">{{item.restArouler}} KM</td>
+                                        <td *ngIf="item.restArouler == undefined">---------</td>
+                                        <td style="background: white!important">
+                                                <button [disabled]="item.restArouler < 0" (click)="findOne(item)"  style="background: #42c5e1!important;color: white" class="btn btn-block btn-sm">Editer</button>
+                                        </td>
+                                        
+                                    </tr>
                                 </tbody>
-                              </table>
+                        </table>
+                        <pagination-controls previousLabel="Précédent"
+                        nextLabel="Suivant" class="my-pagination" (pageChange)="firstPage = $event"></pagination-controls>
                     </div>
                 </div>
                 </div>
