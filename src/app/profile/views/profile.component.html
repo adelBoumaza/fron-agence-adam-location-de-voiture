@@ -1,0 +1,151 @@
+<div class="col-lg-12" style="padding: 0px!important;">
+  <app-aside></app-aside>
+  <!-- Right Panel -->
+
+  <div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
+
+    <app-header-part [title]="titleHeaderPart"></app-header-part>
+
+    <div class="content mt-3">
+
+      <form #profileForm="ngForm" [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+        <div class="animated fadeIn">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <strong class="card-title">Information générale</strong>
+                </div>
+                <div class="card-body">
+                  <!-- Credit Card -->
+                  <div id="pay-invoice">
+                    <div class="card-body">
+                      <div class="form-group text-center">
+                        <ul class="list-inline">
+                          <li class="list-inline-item"><i class="fa fa-address-card fa-4x"></i></li>
+                        </ul>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-4">
+                          <div>
+                            <mat-form-field class="col-10">
+                              <input matInput placeholder="Nom *" id="cc-pament" formControlName="nom" name="nom" type="text">
+                              <mat-error *ngIf="forms.nom.errors?.required"></mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div>
+                            <mat-form-field class="col-10">
+                              <input matInput placeholder="Prénom *" id="prenom" formControlName="prenom" name="prenom"
+                                type="text">
+                              <mat-error *ngIf="forms.prenom.errors?.required"></mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div>
+                            <mat-form-field class="col-10">
+                              <input matInput placeholder="Mail" id="email" formControlName="email" name="email" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-4">
+                          <div>
+                            <mat-form-field class="col-10">
+                              <input matInput placeholder="Nom agence *" id="cc-pament" formControlName="nomAgence"
+                                name="nomAgence" type="text">
+                              <mat-error *ngIf="forms.nomAgence.errors?.required"></mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div>
+                            <mat-form-field class="col-10">
+                              <input maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 1 *" formControlName="numeTelOne"
+                                id="tel1" name="tel1" type="tel">
+                              <mat-error *ngIf="forms.numeTelOne.errors?.required"></mat-error>
+                              <mat-error *ngIf="forms.numeTelOne.errors?.maxlength || forms.numeTelOne.errors?.minlength">Le
+                                numéro de télphone doit contenir 10 ou 12 numéros</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div>
+                            <mat-form-field class="col-10">
+                              <input maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 2" formControlName="numTelTwo"
+                                id="tel2" name="tel2" type="tel">
+                              <mat-error>Le numéro de télphone doit contenir 10 ou 12 numéros</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-6">
+                          <div>
+                            <mat-form-field class="col-12">
+                              <input matInput placeholder="Adresse *" id="cc-pament" formControlName="adresse" name="adresse"
+                                type="text">
+                              <mat-error *ngIf="forms.adresse.errors?.required"></mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="custom-file mb-3">
+                            <input #fileInput type="file" (change)="upload($event)" placeholder="Upload file" id="file"
+                              accept=".png,.jpeg,.jpg" class="custom-file-input">
+                            <label class="custom-file-label" for="customFile">Choisir un logo</label>
+                          </div>
+                          <div>
+                            <img *ngIf="url !== undefined " [src]="url" height="200">
+                            <p>{{nameFile}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- .card -->
+            </div>
+            <!--/.col-->
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div id="pay-invoice">
+                  <div class="card-body">
+                    <div [ngClass]="(!btnSave) ? 'col-lg-12':'col-lg-8'" style="margin-bottom: 20px">
+                      <button [disabled]="!profileForm.valid" id="payment-button" type="submit" class="btn btn-outline-info btn-block">
+                        <i class="fa fa-lock fa-lg"></i>&nbsp;
+                        <span id="payment-button-amount">
+                          <i *ngIf="btnSave">Enregistrer</i>
+                          <i *ngIf="!btnSave">Modifier</i>
+                        </span>
+                      </button>
+                    </div>
+                    <div *ngIf="btnSave" class="col-lg-4">
+                      <button class="btn btn-outline-danger btn-block" type="button" (click)="init();">
+                        <span id="payment-button-amountR">
+                          <i>Reset</i>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- .card -->
+            </div>
+          </div>
+        </div><!-- end-->
+      </form> <!-- end form-->
+    </div>
+  </div><!-- /#right-panel -->
+  <!-- Right Panel -->
+</div>
