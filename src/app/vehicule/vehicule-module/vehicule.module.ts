@@ -19,13 +19,7 @@ import { VehiculeRoute } from '../vehicule-route/vehicule.route';
     ],
     imports : [
         GlobalModule,
-        CommonModule,
-        // BrowserModule,
         VehiculeRoute,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        // NgxPaginationModule,
         AsideModule,
         ColorPickerModule,
         NgbModule.forRoot()

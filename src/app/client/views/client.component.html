@@ -3,16 +3,8 @@
         <!-- Right Panel -->
     
     <div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
-            <div class="breadcrumbs">
-                <div class="col-sm-4">
-                    <div class="page-header float-left">
-                        <div class="page-title">
-                            <h1>Créer un nouveau client</h1>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      
+      <app-header-part [title]="titleHeaderPart"></app-header-part>
            
       <div class="content mt-3">
             
@@ -50,16 +42,16 @@
                                         <div class="col-6">
                                             <div>
                                                 <mat-form-field>
-                                                    <input  matInput placeholder="Nom"  id="cc-pament" formControlName="nom" name="nom" type="text">
-                                                    <mat-error *ngIf="forms.nom.errors?.required">*</mat-error>
+                                                    <input  matInput placeholder="Nom *"  id="cc-pament" formControlName="nom" name="nom" type="text">
+                                                    <mat-error *ngIf="forms.nom.errors?.required"></mat-error>
                                                 </mat-form-field>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="col-6">
                                                 <mat-form-field>
-                                                    <input  matInput placeholder="Prénom" id="prenom" formControlName="prenom" name="prenom" type="text">
-                                                    <mat-error *ngIf="forms.prenom.errors?.required">*</mat-error>
+                                                    <input  matInput placeholder="Prénom *" id="prenom" formControlName="prenom" name="prenom" type="text">
+                                                    <mat-error *ngIf="forms.prenom.errors?.required"></mat-error>
                                                 </mat-form-field>
                                             </div>
                                         </div>
@@ -68,10 +60,10 @@
                                       <div class="col-6">
                                            <div>
                                                 <mat-form-field>
-                                                    <input matInput formControlName="dateDeNaissance"  id="dateDeNaissance" name="dateDeNaissance"  [matDatepicker]="myDatepicker" placeholder="Date de naissance">
+                                                    <input matInput formControlName="dateDeNaissance"  id="dateDeNaissance" name="dateDeNaissance"  [matDatepicker]="myDatepicker" placeholder="Date de naissance *">
                                                     <mat-datepicker #myDatepicker></mat-datepicker>
                                                     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                                    <mat-error *ngIf="forms.dateDeNaissance.errors?.required">*</mat-error>
+                                                    <mat-error *ngIf="forms.dateDeNaissance.errors?.required"></mat-error>
                                                 </mat-form-field>
                                            </div>
                                       </div>
@@ -86,8 +78,8 @@
                                   <hr>
                                     <div class="example-container">
                                             <mat-form-field>
-                                                <input placeholder="Adresse" matInput formControlName="adresse"  id="adresse" name="adresse" type="text">
-                                                <mat-error *ngIf="forms.adresse.errors?.required">*</mat-error>
+                                                <input placeholder="Adresse *" matInput formControlName="adresse"  id="adresse" name="adresse" type="text">
+                                                <mat-error *ngIf="forms.adresse.errors?.required"></mat-error>
                                             </mat-form-field>
                                     </div>
                                     <div class="example-container">
@@ -100,7 +92,10 @@
                                         <div class="col-6">
                                             <div>
                                                 <mat-form-field>                                          
-                                                    <input  maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 1" formControlName="numeTelOne"  id="tel1" name="tel1" type="tel">
+                                                    <input  maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 1 *" formControlName="numeTelOne"  id="tel1" name="tel1" type="tel">
+                                                    <mat-error *ngIf="forms.numeTelOne.errors?.required"></mat-error>
+                                                    <mat-error *ngIf ="forms.numeTelOne.errors?.maxlength || forms.numeTelOne.errors?.minlength">Le numéro de télphone doit contenir  10 ou 12 numéros</mat-error>
+                                                    
                                                 </mat-form-field>
                                             </div>
                                         </div>
@@ -108,6 +103,7 @@
                                             <div>
                                                 <mat-form-field>                                          
                                                     <input  maxlength="12" pattern="[0-9]+" matInput placeholder="Tél 2" formControlName="numTelTwo"  id="tel2" name="tel2" type="tel">
+                                                    <mat-error>Le numéro de télphone doit contenir  10 ou 12 numéros</mat-error>
                                                 </mat-form-field>
                                             </div>
                                         </div>
@@ -151,7 +147,7 @@
                                 <hr>
                                 <div class="example-container">
                                         <mat-form-field>
-                                            <input placeholder="Passport N°" matInput formControlName="numeroPasseport" id="passport" name="passport" type="text">
+                                            <input placeholder="N° Passport" matInput formControlName="numeroPasseport" id="passport" name="passport" type="text">
                                         </mat-form-field>
                                 </div>
                                 <div class="row">
@@ -173,7 +169,8 @@
                                 <hr>
                                 <div class="example-container">
                                         <mat-form-field>
-                                            <input placeholder="Permis N°" matInput formControlName="numeroDePermis" id="permis" name="permis" type="text">
+                                            <input placeholder="N° Permis *" matInput formControlName="numeroDePermis" id="permis" name="permis" type="text">
+                                            <mat-error *ngIf="forms.numeroDePermis.errors?.required"></mat-error>
                                         </mat-form-field>
                                 </div>
                                 <div class="row">

@@ -12,6 +12,8 @@ import { GlobalModule } from '../../common/module-common/module.common';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DetteRoute } from '../route/dette.route';
+import { CardHeaderModule } from '../../common/cardHeader/card-header.module';
+import { SearchModule } from '../../common/search/search.module';
 
 
 @NgModule ({
@@ -20,14 +22,10 @@ import { DetteRoute } from '../route/dette.route';
     ],
     imports: [
       GlobalModule,
-      CommonModule,
-      // BrowserModule,
+      CardHeaderModule,
       DetteRoute,
-      FormsModule,
-      HttpClientModule,
-      ReactiveFormsModule,
-      NgxPaginationModule,
       AsideModule,
+      SearchModule,
       NgbModule.forRoot()
     ],
     exports : [

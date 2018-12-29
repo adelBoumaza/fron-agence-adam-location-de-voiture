@@ -13,94 +13,87 @@ import { Router } from '@angular/router';
   selector: 'app-vehicule',
   templateUrl: '../views/vehicule.component.html',
   styleUrls: ['../css/vehicule.component.css',
-  '../../../assets/scss/style.scss',
-  '../../../assets/css/font-awesome.min.css']
+    '../../../assets/scss/style.scss',
+    '../../../assets/css/font-awesome.min.css']
 })
 export class VehiculeComponent implements OnInit {
 
-  tabMarque:any;
+  tabMarque: any;
 
   //assurance
-  assurance : Assurance;
-  vehicule : Vehicule = {} as Vehicule;
-  btnSave : boolean;
-  listeAssurance : Array<Assurance>;
+  assurance: Assurance;
+  vehicule: Vehicule = {} as Vehicule;
+  btnSave: boolean;
+  listeAssurance: Array<Assurance>;
   // param
-  success : string;
-  existError:boolean;
-  existSuccess : boolean;
+  success: string;
+  existError: boolean;
+  existSuccess: boolean;
   ICON_ERROR = '../../../assets/icon/error.png';
   ICON_SUCCESS = '../../../assets/icon/correct.png';
   chargement = '../../../assets/icon/chargement.gif';
-  confirmChargement:boolean = false;
+  confirmChargement: boolean = false;
 
-   // modal
-   closeResult: string;
-   confirmAddAssurance :boolean;
+  // modal
+  closeResult: string;
+  confirmAddAssurance: boolean;
 
-   ICON_ASSURANCE_PATH = '../../../assets/icon/icon-car-insurance.png';
+  ICON_ASSURANCE_PATH = '../../../assets/icon/icon-car-insurance.png';
+  titleHeaderPart: string = 'Créer une nouvelle voiture';
 
-  constructor(private modalService: NgbModal,private _router:Router,
-              private vehiculeService:VehiculeService,
-              private utilitaireService:UtilitaireService,
-              private utiltaireService : UtilitaireService,
-              private vcRef: ViewContainerRef, 
-              private cpService: ColorPickerService) 
-              { 
-                this.btnSave = true;
-                if(vehiculeService.vehiculeObject != null)
-                {
-                  this.btnSave = false;
-                  this.vehicule = vehiculeService.vehiculeObject;
-                  this.vehicule.idUser = localStorage.getItem('id');
-                  this.resetAssurance();
-                  this.findAllAssuranceByVehicule(this.vehicule.id);
-                }
-                
-              }
+  constructor(private modalService: NgbModal, private _router: Router,
+    private vehiculeService: VehiculeService,
+    private utilitaireService: UtilitaireService,
+    private utiltaireService: UtilitaireService,
+    private vcRef: ViewContainerRef,
+    private cpService: ColorPickerService) {
+    this.btnSave = true;
+    if (vehiculeService.vehiculeObject != null) {
+      this.btnSave = false;
+      this.vehicule = vehiculeService.vehiculeObject;
+      this.vehicule.idUser = localStorage.getItem('id');
+      this.resetAssurance();
+      this.findAllAssuranceByVehicule(this.vehicule.id);
+    }
 
-  ngOnInit() 
-  {
+  }
+
+  ngOnInit() {
     this.existError = false;
     this.existSuccess = false;
     this.tabMarque = this.utilitaireService.getMarques();
-    if(this.btnSave)
-    {
+    if (this.btnSave) {
       this.resetAll();
     }
   }
 
-  findAllAssuranceByVehicule(id)
-  {
+  findAllAssuranceByVehicule(id) {
     this.vehiculeService.findAllAssuranceByVehicule(id)
-    .subscribe(response =>{
-      this.listeAssurance = response;
-    },error =>{
+      .subscribe(response => {
+        this.listeAssurance = response;
+      }, error => {
+        throw error;
+      });
 
-    });
-    
-    
+
   }
 
 
-  resetAssurance()
-  {
-    this.assurance =  new Assurance(0,null,'');
+  resetAssurance() {
+    this.assurance = new Assurance(0, null, '');
     this.confirmAddAssurance = true;
-  
+
   }
 
-  resetVehicule()
-  {
+  resetVehicule() {
     this.vehicule = {} as Vehicule;
     this.vehicule.energie = 'Essance';
-    this.vehicule.anneeFabrication = new Date().getFullYear(); 
+    this.vehicule.anneeFabrication = new Date().getFullYear();
     this.vehicule.typeVehicule = 'Touristique';
     this.vehicule.couleur = '#fff';
   }
 
-  resetAll()
-  {
+  resetAll() {
     this.resetAssurance();
     this.resetVehicule();
     this.listeAssurance = [];
@@ -108,100 +101,86 @@ export class VehiculeComponent implements OnInit {
   }
 
 
-  addAssurance()
-  {
+  addAssurance() {
 
-      if(
-          (this.assurance._prixAchat != 0 &&  this.assurance._prixAchat != undefined) &&
-          (this.assurance._dateExpiration != '' || this.assurance._dateExpiration != undefined) &&
-          (this.assurance._typeAssurance != '' || this.assurance._typeAssurance != undefined)
-        )
-      {
-          let dateExpiration = new Date(this.assurance._dateExpiration);
-          let now            = new Date();
-          if(dateExpiration.getTime() < now.getTime())
-          {
-            this.confirmAddAssurance = false;
-          }else
-          {
-            this.listeAssurance.push(new Assurance(
-              this.assurance._prixAchat,
-              this.utilitaireService.formattedDate(this.assurance._dateExpiration),
-              this.assurance._typeAssurance));
-              this.resetAssurance();
-          }
-          
-      }
-      else
-      {
+    if (
+      (this.assurance._prixAchat != 0 && this.assurance._prixAchat != undefined) &&
+      (this.assurance._dateExpiration != '' || this.assurance._dateExpiration != undefined) &&
+      (this.assurance._typeAssurance != '' || this.assurance._typeAssurance != undefined)
+    ) {
+      const dateExpiration = new Date(this.assurance._dateExpiration);
+      const now = new Date();
+      if (dateExpiration.getTime() < now.getTime()) {
         this.confirmAddAssurance = false;
+      } else {
+        this.listeAssurance.push(new Assurance(
+          this.assurance._prixAchat,
+          this.utilitaireService.formattedDate(this.assurance._dateExpiration),
+          this.assurance._typeAssurance));
+        this.resetAssurance();
       }
-       
+
+    }
+    else {
+      this.confirmAddAssurance = false;
+    }
+
   }
 
-  deleteAssurance(item)
-  {
+  deleteAssurance(item) {
     this.listeAssurance.splice(item, 1);
   }
 
-  addVehicule()
-  {
+  addVehicule() {
     this.confirmChargement = true;
     this.vehicule.idUser = localStorage.getItem('id');
     this.vehicule.listeAssuranceDto = new Array<Assurance>()
-    this.listeAssurance.forEach(obj =>{
-         this.vehicule.listeAssuranceDto.push(obj);
+    this.listeAssurance.forEach(obj => {
+      this.vehicule.listeAssuranceDto.push(obj);
     });
-   
-   if(this.vehicule.listeAssuranceDto.length == 0)
-   {
+
+    if (this.vehicule.listeAssuranceDto.length === 0) {
       this.existError = true;
       this.success = 'Assurance est obligatoire *';
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
       this.confirmChargement = false;
-   }else
-   {
-      this.vehiculeService.addVehicule(this.vehicule,this.btnSave)
-      .subscribe(response =>
-      {
-        this.confirmChargement = false;
-        this.existError = false;
-        this.existSuccess = true;
-        this.success = 'le vehicule à bien été créér avec success';
-        if(!this.btnSave)
-        {
-          this.success = 'le vehicule à bien été modifié avec success';
-          setTimeout(() => {
-            console.log('redirect ....');
-            this._router.navigateByUrl('liste-vehicule');
-          }, 1000);
-        }
-        this.resetAll();
-      },error =>
-      {
-      this.existError = true;
-      this.existSuccess = false;
-      this.confirmChargement = false;
-      if(error.status == '417')
-      {
-          this.success = error.error.message;
-      }else
-      {
-        this.success = 'Une erreur est survenue lors de la tentative de traitement de votre demande (-_-) !';
-      }
-      });
-      window.scrollTo(0, 0); 
-   }
+    } else {
+      this.vehiculeService.addVehicule(this.vehicule, this.btnSave)
+        .subscribe(response => {
+          this.confirmChargement = false;
+          this.existError = false;
+          this.existSuccess = true;
+          this.success = 'le vehicule à bien été créér avec success';
+          if (!this.btnSave) {
+            this.success = 'le vehicule à bien été modifié avec success';
+            setTimeout(() => {
+              console.log('redirect ....');
+              this._router.navigateByUrl('liste-vehicule');
+            }, 1000);
+          }
+          this.resetAll();
+        }, error => {
+          this.existError = true;
+          this.existSuccess = false;
+          this.confirmChargement = false;
+          if (error.status === 417) {
+            this.success = error.error.message;
+          } else {
+            this.success = 'Une erreur est survenue lors de la tentative de traitement de votre demande (-_-) !';
+            throw error;
+          }
+        });
+      window.scrollTo(0, 0);
+    }
 
-   
+
   }
 
-  redirectToPageListeVehicule()
-  {
+  redirectToPageListeVehicule() {
     this._router.navigateByUrl('liste-vehicule');
   }
 
-  //modal
+  // modal
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -218,13 +197,12 @@ export class VehiculeComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
-    
+
   }
 
-  choiseMarque(marque)
-  {
+  choiseMarque(marque) {
     switch (marque) {
       case 1:
         this.vehicule.marque = "PEUGEOT";
@@ -263,9 +241,9 @@ export class VehiculeComponent implements OnInit {
   }
 
 
-  
 
-  
+
+
 
 }
 

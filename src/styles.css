@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 
 .fs-menu{
     font-size: 12px!important;
@@ -9,6 +9,9 @@
 .table td, .table th {
     padding: 6px;
     font-size: 12px;
+}
+.table tr {
+    line-height: 30px!important;
 }
 /*
 .ng-valid[required], .ng-valid.required  {

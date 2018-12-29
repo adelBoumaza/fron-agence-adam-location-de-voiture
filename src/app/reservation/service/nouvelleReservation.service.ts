@@ -7,33 +7,28 @@ import { Reservation } from '../model/reservation.model';
 @Injectable()
 export class NouvelleReservationService {
 
-    constructor(private _api:ApiAgenceAdamService)
-    {
+    constructor(private _api: ApiAgenceAdamService) {
 
     }
 
 
-    public findAllReservation(month :number,year:number):Observable<any>
-    {
+    public findAllReservation(month: number, year: number): Observable<any> {
 
-        return this._api.GET(Constant.findAllReservation+'/'+month+'/'+year+'/'+localStorage.getItem('id')) ;
-    }
-    
-    public saveReservation(reservation:Reservation,save:boolean)
-    {
-        return this._api.POST(reservation,Constant.saveReservationUrl+'/'+save);
+        return this._api.GET(Constant.findAllReservation + '/' + month + '/' + year + '/' + localStorage.getItem('id'));
     }
 
-    public annulerReservation(reservation:Reservation,idReservation:number)
-    {
-        return this._api.POST(reservation,Constant.annulerReservation+'/'+idReservation);
+    public saveReservation(reservation: Reservation, save: boolean) {
+        return this._api.POST(reservation, Constant.saveReservationUrl + '/' + save);
     }
 
-    public findOneReservation(idReservation :number):Observable<any>
-    {
-
-        return this._api.GET(Constant.findOneReservation+'/'+idReservation) ;
+    public annulerReservation(reservation: Reservation, idReservation: number) {
+        return this._api.POST(reservation, Constant.annulerReservation + '/' + idReservation);
     }
 
-    
+    public findOneReservation(idReservation: number): Observable<any> {
+
+        return this._api.GET(Constant.findOneReservation + '/' + idReservation);
+    }
+
+
 }

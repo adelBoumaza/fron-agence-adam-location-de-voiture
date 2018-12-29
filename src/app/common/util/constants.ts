@@ -25,6 +25,7 @@ export enum Constant{
     findOneReservation = '/reservation/findOneReservation',
     saveOrUpdateLocationUrl = '/location/saveOrUpdate',
     findAllDettesByUser = '/dette/findAll/user',
+    saveOrUpdateProfile = '/profile/saveOrUpdate',
 
      /**
      * Constant

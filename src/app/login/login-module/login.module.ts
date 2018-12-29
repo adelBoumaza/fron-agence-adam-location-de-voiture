@@ -17,11 +17,7 @@ import { LoginRoute } from '../login-route/login.route';
 
 @NgModule({
     imports : [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        NgxPaginationModule,
+        GlobalModule,
         LoginRoute,
         AsideModule,
         ColorPickerModule,

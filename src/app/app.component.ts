@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import 'rxjs/add/operator/takeWhile';
-import 'rxjs/add/observable/timer';
+
 
 @Component({
   selector: 'app-root',
@@ -8,4 +7,5 @@ import 'rxjs/add/observable/timer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
 }

@@ -28,15 +28,11 @@ import { GlobalModule } from '../../common/module-common/module.common';
     imports:
     [
       GlobalModule,
-      CommonModule,
       MatFormFieldModule, MatInputModule, MatProgressBarModule , MatDatepickerModule,
       MatNativeDateModule, MatIconModule,
       MatRadioModule,
       MatRippleModule,
       MatSelectModule,
-      FormsModule,
-      HttpClientModule,
-      ReactiveFormsModule,
       AsideModule,
       ClientRoute,
       NgbModule.forRoot()

@@ -1,41 +1,42 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClientRoute } from '../route/client.route';
-import { ClientComponent } from '../component/client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { AsideComponent } from '../../aside/aside.component';
 import { ClientListeComponent } from '../component/client.liste.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipe } from '../../common/pipe/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AsideModule } from '../../aside/aside-module/aside-module.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-import { ColorPickerModule } from 'ngx-color-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalModule } from '../../common/module-common/module.common';
 import { ListeClientRoute } from '../route/client.liste.route';
+import { ErrorGlobalHandlerService } from '../../common/error/global-error/service/error.global.handler.service';
+import { TableComponent } from '../../common/table/table.component';
+import { CardHeaderModule } from '../../common/cardHeader/card-header.module';
+import { SearchModule } from '../../common/search/search.module';
 
-@NgModule ({
-    declarations: [
+@NgModule({
+  declarations:
+    [
       ClientListeComponent
     ],
-    imports: [
+  imports:
+    [
       GlobalModule,
-      CommonModule,
-      FormsModule,
-      HttpClientModule,
-      ReactiveFormsModule,
-      NgxPaginationModule,
       AsideModule,
       NgbModule.forRoot(),
-      ListeClientRoute
+      ListeClientRoute,
+      SearchModule,
+      CardHeaderModule
     ],
-    exports : [
+  exports:
+    [
       ClientListeComponent
     ]
-  })
+    ,
+    providers:
+    [
+      { provide: ErrorHandler, useClass: ErrorGlobalHandlerService }
+    ]
+})
 export class ListeClientModule {
 
 }

@@ -16,14 +16,7 @@ import { ReservationRoute } from '../route/reservation.route';
 @NgModule({
     imports : [
         GlobalModule,
-        CommonModule,
-        // BrowserModule,
-        // RouterModule,
         ReservationRoute,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        NgxPaginationModule,
         AsideModule,
         ColorPickerModule,
         NgbModule.forRoot()

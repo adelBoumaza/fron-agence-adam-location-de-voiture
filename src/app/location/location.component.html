@@ -3,16 +3,9 @@
         <!-- Right Panel -->
     
     <div id="right-panel" class="right-panel col-lg-10 col-md-8 col-sm-8">
-            <div class="breadcrumbs">
-                <div class="col-sm-4">
-                    <div class="page-header float-left">
-                        <div class="page-title">
-                            <h1>Créer une nouvelle location</h1>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
+        <app-header-part [title]="titleHeaderPart"></app-header-part>
+
       <div class="content mt-3">
         <div class="animated fadeIn">
             <form #saveLocationForm="ngForm">
@@ -186,7 +179,7 @@
                                     <div class="col-6">
                                         <div class="form-group input-group-sm">
                                             <label for="passport" class="control-label mb-1 fs-menu">Passport N°</label>
-                                            <input required [(ngModel)]="location.numeroPasseport" id="passport" name="passport" type="text" class="form-control">
+                                            <input [(ngModel)]="location.numeroPasseport" id="passport" name="passport" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">

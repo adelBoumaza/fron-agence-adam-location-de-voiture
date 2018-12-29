@@ -7,55 +7,48 @@ import { Router } from '@angular/router';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'
-                ]
+    ]
 })
 export class LoginComponent implements OnInit {
-    
-    private user : User;
-    private error : string;
-    
+
+    private user: User;
+    private error: string;
+
     constructor(
-        private loginService:LoginService,
-        private _router:Router) 
-    { }
+        private loginService: LoginService,
+        private _router: Router) { }
 
     ngOnInit(): void {
-        this.user = new User({username: 'Sara', password: 'adel'});
+        this.user = new User({ username: 'Sara', password: 'adel' });
         this.reset();
     }
 
-    reset()
-    {
+    reset() {
         this.error = '';
     }
 
 
-    doLogin()
-    {
-        console.log(this.user);
-        this.loginService.login(this.user)
-        .subscribe(response => 
-            {
-                localStorage.setItem('token', `${response.token_type} ${response.access_token}`);
-                console.log('localStorage' + localStorage.getItem('token'));
+    doLogin() {
+        this.loginService.login(this.user).subscribe(loginResponse => {
+            localStorage.setItem('token', `${loginResponse.token_type} ${loginResponse.access_token}`);
+            console.log('localStorage' + localStorage.getItem('token'));
+            this.loginService.getCurrentUser().subscribe(currentUserResponse => {
+                localStorage.setItem('id', currentUserResponse.id);
                 this._router.navigateByUrl('/dashboard');
                 this.reset();
-            }, (err) => 
-            {
+            });
+        }, err => {
+            if (err.status === 401) {
                 this.error = 'Le nom d\'utilisateur ou le mot de passe est incorrect';
-                this._router.navigateByUrl('/home');
+            } else {
+                throw err;
             }
-        );
-        this.loginService.getCurrentUser()
-        .subscribe(response =>
-            {
-                localStorage.setItem('id',response.id);
-            }, error =>
-            {
-                console.log('Current User : ' + error);
-            }
-        );
+            this._router.navigateByUrl('/home');
+        });
     }
+
+
+
 }
 
 

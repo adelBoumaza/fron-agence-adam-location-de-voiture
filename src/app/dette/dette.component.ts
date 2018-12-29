@@ -5,12 +5,18 @@ import { DetteService } from './dette.service';
     selector: 'app-dette',
     templateUrl: './dette.component.html',
     styleUrls: ['./dette.component.css', '../../assets/scss/style.scss',
-    '../../assets/css/font-awesome.min.css']
+        '../../assets/css/font-awesome.min.css']
 })
 export class DetteComponent implements OnInit {
     listeDette;
     totalDette: number = 0;
     ICON_MONEY = '../../assets/icon/icon-money.png';
+    title: string = 'Total Dettes';
+    label: string = 'Rechercher un client';
+    placeholder: string = 'Rechercher par Nom ...';
+    filterQuery;
+    titleHeaderPart: string = 'Liste des clients';
+
 
     constructor(private detteService: DetteService) { }
 
@@ -19,16 +25,21 @@ export class DetteComponent implements OnInit {
     }
 
 
-     chercher() {
+    chercher() {
         this.detteService.findAllDettesByUser()
-        .subscribe(response => {
-            this.listeDette = response;
-            this.listeDette.forEach(item => {
-                this.totalDette = this.totalDette + item.resteApayer;
+            .subscribe(response => {
+                this.listeDette = response;
+                this.listeDette.forEach(item => {
+                    this.totalDette = this.totalDette + item.resteApayer;
+                });
+            }, error => {
+                console.log('error ' + error);
+                throw error;
             });
-        }, error => {
-            console.log('error ' + error);
-        });
+    }
+
+    onValueInParentComponentChanged(event) {
+        this.filterQuery = event;
     }
 
 

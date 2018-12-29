@@ -14,7 +14,7 @@ import { UtilitaireService } from '../common/util/utilitaire';
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.css','../../assets/css/normalize.css',
+  styleUrls: ['./aside.component.css', '../../assets/css/normalize.css',
   '../../assets/scss/style.scss',
   '../../assets/css/themify-icons.css',
   '../../assets/css/flag-icon.min.css',
@@ -40,26 +40,25 @@ export class AsideComponent  {
   menuState: string = 'out';
   timer = 0;
   alive = false;
-  routes : any;
-  constructor(private _asideService:AsideService,private _utilitaireService : UtilitaireService)
+  routes: any;
+  constructor(private _asideService: AsideService, private _utilitaireService: UtilitaireService)
   {
-    this._asideService.change.subscribe(isOpen => 
+    this._asideService.change.subscribe(isOpen =>
     {
-        if(isOpen)
-        {
-            this.toggleMenu();
+        if (isOpen) {
+           // this.toggleMenu();
         }
     });
     this._asideService.timerOutput.subscribe(x =>
     {
       this.timer = x * 1000;
       this.alive = true;
-      this.repeter();
+      // this.repeter();
     });
     this.faireDisparaitre();
     this.routes  = _utilitaireService.getMenuRoutes();
   }
-  ngOnDestroy(){
+ /* ngOnDestroy() {
     this.alive = false; // switches your IntervalObservable off
   }
 
@@ -69,9 +68,9 @@ export class AsideComponent  {
 
   ngOnInit() {
     console.log('ngOninit');
-  }
+  }*/
 
-  repeter(): void {
+ /* repeter(): void {
     this.menuState = 'in';
     console.log(this.timer);
     Observable.timer(0, this.timer)
@@ -79,14 +78,13 @@ export class AsideComponent  {
     .subscribe(() => {
       this.toggleMenu();
     });
-  }
+  }*/
 
-  faireDisparaitre()
-  {
+  faireDisparaitre() {
     this._asideService.change.subscribe(isOpen => {
       this.menuState = 'in';
       this.alive = false;
-      this.toggleMenu();
+      // this.toggleMenu();
     });
   }
 

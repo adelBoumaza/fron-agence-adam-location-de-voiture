@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -30,6 +30,13 @@ import { DetteService } from './dette/dette.service';
 import { AsideModule } from './aside/aside-module/aside-module.module';
 import { GlobalModule } from './common/module-common/module.common';
 import { LoginService } from './login/login.service';
+import { ErrorGlobalHandlerService } from './common/error/global-error/service/error.global.handler.service';
+import { ErrorGlobalComponent } from './common/error/global-error/component/error.global.handler.component';
+import { CardHeaderModule } from './common/cardHeader/card-header.module';
+import { HeaderPartComponent } from './common/header-part/header-part.component';
+import { ProfileService } from './profile/service/profile.service';
+
+
 
 
 
@@ -45,7 +52,8 @@ import { LoginService } from './login/login.service';
     AppComponent,
     DashboardComponent,
     LayoutComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    ErrorGlobalComponent
   ]
   ,
   imports: [
@@ -53,6 +61,7 @@ import { LoginService } from './login/login.service';
     AppRoutingModule,
     GlobalModule,
     AsideModule
+
   ]
   ,
   providers: [
@@ -64,8 +73,10 @@ import { LoginService } from './login/login.service';
     AuthGuard, ReservationSesrvice, NouvelleReservationService, I18n, CustomDatepickerI18n, ClientService,
     RevisionService, RevisionResolver, AsideService, AlertService, MaintenanceService, MaintenanceResolver,
     ApiAgenceAdamService, ApiResolverAgenceAdamService, ClientServiceResolver, VehiculeService, VehiculeResolver,
-    DetteService
+    DetteService, ProfileService,
+    { provide: ErrorHandler, useClass: ErrorGlobalHandlerService }
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

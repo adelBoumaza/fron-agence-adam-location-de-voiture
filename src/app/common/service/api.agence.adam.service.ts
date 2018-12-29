@@ -14,19 +14,18 @@ export class ApiAgenceAdamService {
 
     }
 
-    public GET(url):Observable<any>
-    {
+    public GET(url): Observable<any> {
         const headers = new HttpHeaders()
             .set('Authorization', localStorage.getItem('token'));
-        ;
 
-        return this._httpClient.get<any>(`${Constant.baseUrl}`+'/'+url, { headers: headers });
+
+        return this._httpClient.get<any>(`${Constant.baseUrl}` + '/' + url, { headers: headers });
     }
 
-    public POST(body:any,url:any): Observable<any> {
+    public POST(body: any, url: any): Observable<any> {
         const headers = new HttpHeaders()
             .set('Authorization', localStorage.getItem('token'));
-        ;
+
 
         return this._httpClient.post<any>(`${Constant.baseUrl}` + url, body, { headers: headers });
     }

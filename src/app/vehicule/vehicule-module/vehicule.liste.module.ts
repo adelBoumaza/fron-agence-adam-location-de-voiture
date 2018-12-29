@@ -4,28 +4,22 @@ import { GlobalModule } from '../../common/module-common/module.common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AsideModule } from '../../aside/aside-module/aside-module.module';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { VehiculeListeRoute } from '../vehicule-route/vehicule.liste.route';
-import { RouterModule } from '@angular/router';
+import { CardHeaderModule } from '../../common/cardHeader/card-header.module';
+import { SearchModule } from '../../common/search/search.module';
 
 @NgModule({
     declarations : [
-        VehiculeListeComponent
+        VehiculeListeComponent,
     ],
     imports : [
         GlobalModule,
-        CommonModule,
-        // BrowserModule,
+        CardHeaderModule,
         VehiculeListeRoute,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        NgxPaginationModule,
         AsideModule,
         ColorPickerModule,
+        SearchModule,
         NgbModule.forRoot()
     ],
     exports : [
